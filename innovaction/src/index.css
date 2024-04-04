@@ -25,7 +25,9 @@
 .page{
   max-width: 1280px;
   margin: 0 auto;
+  float: top;
   text-align: center;
+
 }
 
 .navbar{
@@ -35,7 +37,8 @@
   justify-content: center;
   text-align: center;
   align-items: center;
-  border-radius: 5px;
+  border: 0px;
+  border-top: 5px;
   border-style: solid;
   border-color: #00A3E0;
 }
@@ -56,6 +59,7 @@
 .title-card{
   background-color: #FFFFFF;
   height: 100px;
+  min-width: 1000px;
   padding: 10px;
   display: flex;
   justify-content: center;
@@ -90,7 +94,6 @@ a:hover {
 body {
   margin: 0;
   display: flex;
-  place-items: center;
   min-width: 320px;
   min-height: 100vh;
 }
