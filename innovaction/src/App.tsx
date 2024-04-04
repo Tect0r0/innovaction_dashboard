@@ -3,7 +3,7 @@ import { useState } from 'react'
 import Inicio from './Inicio'
 import Calendario from './Calendario'
 import Contacto from './Contacto'
-import Logo from './assets/innovaction1.png'
+import Logo from './assets/innovaction1-t.png'
 
 type PageName = 'Inicio' | 'Calendario' | 'Contacto'; // Definir los nombres de las páginas
 
