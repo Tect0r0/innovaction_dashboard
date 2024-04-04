@@ -25,17 +25,17 @@ export default function App() {
         </div>
         <div className="navbar">
           <button 
-          style={{color: page === "Inicio" ? "#00A3E0" : "", textDecoration: page === "Inicio" ? "underline" : ""}}
-          onClick={() => setPage("Inicio")}
-          > Inicio </button>
-          <button 
           style={{color: page === "Calendario" ? "#00A3E0" : "", textDecoration: page === "Calendario" ? "underline" : ""}}
           onClick={() => setPage("Calendario")}
-          > Calendario </button>
+          ><strong>CALENDARIO</strong></button>
+          <button 
+          style={{color: page === "Inicio" ? "#00A3E0" : "", textDecoration: page === "Inicio" ? "underline" : ""}}
+          onClick={() => setPage("Inicio")}
+          ><strong>INICIO</strong></button>
           <button 
           style={{color: page === "Contacto" ? "#00A3E0" : "", textDecoration: page === "Contacto" ? "underline" : ""}}
           onClick={() => setPage("Contacto")}
-          > Contacto </button>
+          ><strong>CONTACTO</strong></button>
         </div>
 
       </header>

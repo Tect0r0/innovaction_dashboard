@@ -1,5 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Aldrich&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
@@ -7,6 +11,7 @@
   color: black;
   background-color: #00A3E0;
 
+  font-family: Roboto;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -22,25 +27,34 @@
   text-align: center;
 }
 
+.header{
+  min-width: 1000px;
+}
+
 .page{
-  max-width: 1280px;
+  min-width: 80%;
   margin: 0 auto;
   float: top;
   text-align: center;
-
+  background-color: #FFFFFF;
+  border-radius: 5px;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.279);
 }
 
 .navbar{
   background-color: #FFFFFF;
-  padding: 10px;
+  height: 45px;
+  margin-top: 5px;
+  margin-bottom: 50px;
+  padding: 5px;
   display: flex;
   justify-content: center;
   text-align: center;
   align-items: center;
   border: 0px;
-  border-top: 5px;
   border-style: solid;
   border-color: #00A3E0;
+  box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.279);
 }
 
 .navbar button{
@@ -48,8 +62,9 @@
   border: none;
   border-style: none;
   color: black;
-  margin: 10px;
-  font-size: 30px;
+  margin: 5px;
+  font-size: 25px;
+  width: 160px;
 }
 
 .navbar button:hover{
@@ -59,7 +74,6 @@
 .title-card{
   background-color: #FFFFFF;
   height: 100px;
-  min-width: 1000px;
   padding: 10px;
   display: flex;
   justify-content: center;
@@ -69,10 +83,12 @@
 }
 
 .title{
-  font-size: 3em;
+  font-size: 50px;
   font-weight: 500;
   color: #00A3E0;
   margin: 0 auto;
+  font-family: Poppins;
+  font-weight: bold;
 }
 
 .logo{
@@ -94,13 +110,14 @@ a:hover {
 body {
   margin: 0;
   display: flex;
-  min-width: 320px;
+  min-width: 1000px;
   min-height: 100vh;
 }
 
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
+  font-family: Aldricht;
 }
 
 button {
