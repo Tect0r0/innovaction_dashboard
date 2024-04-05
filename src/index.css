@@ -32,6 +32,14 @@
   background-image: url('./assets/innovaction2.png');
   background-color: #00A3E0;
   background-size: 100px 100px;
+  animation: moveBackground 5s linear infinite;
+}
+
+
+@keyframes moveBackground {
+  0% { background-position: 0 0; }
+  100% { background-position: 100px 100px; }
+ 
 }
 
 #root {
@@ -143,7 +151,7 @@ input[type=datetime-local]::-webkit-calendar-picker-indicator {
 .header{
   min-width: 1000px;
 }
-
+/*   ------------------ HeadLine y Containers      -------------------*/
 .page{
   min-width: 80%;
   margin: 0 auto;
@@ -182,6 +190,8 @@ font-family: Poppins;
 font-weight: bold;
 
 }
+
+
 
 
 .navbar{
