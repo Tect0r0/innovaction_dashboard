@@ -6,17 +6,14 @@
 :root {
   line-height: 1.5;
   font-weight: 400;
-
   color-scheme: light dark;
   color: black;
   background-color: #00A3E0;
-
   font-family: Roboto;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-
   text-align: center;
 }
 
@@ -40,7 +37,6 @@
 @keyframes moveBackground {
   0% { background-position: 0 0; }
   100% { background-position: 100px 100px; }
- 
 }
 
 #root {
@@ -194,7 +190,7 @@ font-weight: bold;
 
 
 
-
+/*--------------Nav bar------------------*/
 .navbar{
   background-color: #FFFFFF;
   height: 45px;
@@ -266,12 +262,10 @@ font-weight: bold;
 }
 
 /*--------------      Agendar tu evento   -------------*/
-
 .form-field{
   width: 90%;
   margin-left: 4%;
 }
-
 .form-field label{
   font-size: 4dvh;
   font-weight: 500;
@@ -282,7 +276,6 @@ font-weight: bold;
   text-align: left;
   margin-left: 9.5%;
 }
-
 .form-field input{
   font-size: 3dvh;
   font-family: inherit;
@@ -293,8 +286,6 @@ font-weight: bold;
   height: 30px;
   margin-top: 1%;
 }
-
-
 .form-field select{
   font-size: 3dvh;
   font-family: inherit;
@@ -305,7 +296,6 @@ font-weight: bold;
   height: 30px;
   margin-top: 1%;
 }
-
 .form-field textarea{
   font-size: 3dvh;
   font-family: inherit;
@@ -316,7 +306,6 @@ font-weight: bold;
   height: 80px;
   margin-top: 1%;
 }
-
 .form-field option{
   font-size: 3dvh;
   font-family: inherit;
@@ -327,14 +316,11 @@ font-weight: bold;
   height: 80px;
   margin-top: 1%;
 }
-
-
 .form-container{
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 20px;
 }
-
 .submit{
   width: 15%;
   height: auto;
@@ -347,4 +333,72 @@ font-weight: bold;
   font-weight: 500;
   font-family: inherit;
   cursor: pointer;
+}
+
+/*  ------------ Pagina de Inicio -------------------  */
+
+.tit-inicio{
+  font-family: Poppins;
+  font-size: 35px;
+}
+.parent-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 90vh; /* Esto asegura que el contenedor padre ocupe toda la altura de la vista */
+  background-color: #535bf2;
+}
+
+.text-container {
+  max-width: 80%;
+  text-align: center;
+  
+  margin: auto;
+
+}
+
+.carousel-container{
+  max-width: 80%;
+}
+
+.p-inicio{
+  font-family: Poppins;
+  font-size: 20px;
+}
+.carousel-Container {
+  max-width: 70%;
+  height: 45vh;
+  margin-left: 15%;
+  display: flex;
+  
+}
+
+.secondary-image{
+  width: 20%;
+}
+
+.main-image{
+  width: 80%;
+  background-color: aqua;
+  border-radius: 5px;
+
+}
+
+.imageContSec{
+  height: 80%;
+  margin-top: 26%;
+  border-radius: 5px;
+}
+
+.secImg{
+  width: 100%;
+  height: 100%;
+  border-radius: 5px;
+  opacity: 0.6;
+}
+
+.mainImg{
+  width: 100%;
+  height: 100%;
+  border-radius: 5px;
 }
