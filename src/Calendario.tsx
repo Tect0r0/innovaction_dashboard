@@ -29,8 +29,14 @@ export default function Calendario() {
     const [events] = useState<Event[]>(eventos);
 
     return (
+        
+        <div className='container'>
+            <div className='headLine'>
+                 <h1>Calendario </h1>
+            </div>
+            <br />
+
         <div className="page">
-            <h1>Calendario</h1>
             <div style={{ height: 500 }}>
                 <Calendar
                     localizer={localizer}
@@ -41,5 +47,6 @@ export default function Calendario() {
                 />
             </div>
         </div>
+    </ div>
     );
 }
