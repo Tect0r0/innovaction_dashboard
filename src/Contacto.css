@@ -4,6 +4,10 @@
   border-style: solid;
   border-color: #00A3E0;
   border-radius: 1px;
+  width: 50vw;
+  min-width: 250;
+  max-width: 275;
+  height: 20vw;
 }
 
 .container {

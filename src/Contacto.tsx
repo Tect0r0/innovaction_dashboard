@@ -7,12 +7,12 @@ export default function Contacto() {
                 <h1>Contacto</h1>
             </div><br/>
             <div className="page">
-                <div>
+                <div style={{display:"flex", flexDirection: "column", justifyContent:"center", alignItems:"center"}}>
                     <h2>Encuéntranos en:</h2>
                     <div className="map_container">
                         <iframe 
                             src={"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1798.3139800668769!2d-100.29219272265408!3d25.650470451942223!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8662bfb855143edb%3A0xf0e23f5a6520ff77!2sINNOVaction%20Gym!5e0!3m2!1sen!2smx!4v1712349248250!5m2!1sen!2smx"}
-                            style={{ width: '100%', height: '300px'}}
+                            style={{ width: '100%', height: '100%'}}
                             allowFullScreen
                             loading="lazy"
                             >
