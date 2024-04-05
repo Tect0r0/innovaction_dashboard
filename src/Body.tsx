@@ -31,7 +31,7 @@ export default function Body() {
                                 <button 
                 style={{color: page === "Agendar" ? "#00A3E0" : "", textDecoration: page === "Agendar" ? "underline" : ""}}
                 onClick={() => setPage("Agendar")}
-                ><strong>AGENDAR CITA</strong></button>
+                ><strong>AGENDAR EVENTO</strong></button>
                 <button 
                 style={{color: page === "Contacto" ? "#00A3E0" : "", textDecoration: page === "Contacto" ? "underline" : ""}}
                 onClick={() => setPage("Contacto")}

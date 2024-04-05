@@ -139,17 +139,6 @@ input[type=datetime-local]::-webkit-calendar-picker-indicator {
   background-color: #DDDDDD;
 }
 
-.submit{
-  background-color: #00A3E0;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  padding: 10px;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  cursor: pointer;
-}
 
 .header{
   min-width: 1000px;
@@ -164,6 +153,36 @@ input[type=datetime-local]::-webkit-calendar-picker-indicator {
   border-radius: 5px;
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.279);
 }
+
+.container{
+  min-width: 80%;
+  margin: 0 auto;
+}
+
+.headLine{
+min-width: 80%;
+height: 10%;
+margin: 0 auto;
+float: top;
+display: flex;
+justify-content: center;
+align-items: center;
+text-align: center;
+background-color: #FFFFFF;
+border-radius: 5px;
+box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.279);
+
+}
+
+.headLine h1{
+font-size: 38px;
+color: black;
+margin: 0 auto;
+font-family: Poppins;
+font-weight: bold;
+
+}
+
 
 .navbar{
   background-color: #FFFFFF;
@@ -233,4 +252,88 @@ input[type=datetime-local]::-webkit-calendar-picker-indicator {
   button {
     background-color: #f9f9f9;
   }
+}
+
+/*--------------      Agendar tu evento   -------------*/
+
+.form-field{
+  width: 90%;
+  margin-left: 4%;
+}
+
+.form-field label{
+  font-size: 4dvh;
+  font-weight: 500;
+  font-family: Roboto;
+  color: black;
+  margin-top: 10px;
+  font-style: bold;
+  text-align: left;
+  margin-left: 9.5%;
+}
+
+.form-field input{
+  font-size: 3dvh;
+  font-family: inherit;
+  background-color: #F5F3F3;
+  border-radius: 5px;
+  color: black;
+  width: 80%;
+  height: 30px;
+  margin-top: 1%;
+}
+
+
+.form-field select{
+  font-size: 3dvh;
+  font-family: inherit;
+  background-color: #F5F3F3;
+  border-radius: 5px;
+  color: black;
+  width: 80%;
+  height: 30px;
+  margin-top: 1%;
+}
+
+.form-field textarea{
+  font-size: 3dvh;
+  font-family: inherit;
+  background-color: #F5F3F3;
+  border-radius: 5px;
+  color: black;
+  width: 80%;
+  height: 80px;
+  margin-top: 1%;
+}
+
+.form-field option{
+  font-size: 3dvh;
+  font-family: inherit;
+  background-color: #F5F3F3;
+  border-radius: 5px;
+  color: black;
+  width: 80%;
+  height: 80px;
+  margin-top: 1%;
+}
+
+
+.form-container{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.submit{
+  width: 15%;
+  height: auto;
+  background-color: #00A3E0;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+  font-size: 3.5dvb;
+  font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
 }
