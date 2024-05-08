@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useUser } from "@clerk/clerk-react";
 
 import Inicio from './Inicio'
@@ -9,7 +9,8 @@ import Contacto from './Contacto'
 type PageName = 'Inicio' | 'Calendario' | 'Agendar' | 'Contacto'; // Nombres de las paginas
 
 export default function Body() {
-    const [page, setPage] = useState<PageName | "">("")
+    const initialPage = localStorage.getItem("page") as PageName || "Inicio"; // Obtenemos la pagina guardada en el local storage
+    const [page, setPage] = useState<PageName>(initialPage); // Estado de la pagina actual
     const { user } = useUser();
 
     const isAdmin = user?.publicMetadata?.isAdmin === true; // Checamos si la metadata del usuario es admin
@@ -20,6 +21,11 @@ export default function Body() {
       "Agendar": <Agendar />,
       "Contacto": <Contacto />,
     }
+
+    useEffect(() => {
+        if(page == 'Agendar'){ localStorage.setItem("page", 'Inicio');}
+        else{ localStorage.setItem("page", page) } // Guardamos la pagina actual en el local storage
+    }, [page])
 
     return(
         <>
