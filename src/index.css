@@ -287,7 +287,7 @@ font-weight: bold;
   margin-top: 1%;
 }
 .form-field select{
-  font-size: 3dvh;
+  font-size: 2.2vh;
   font-family: inherit;
   background-color: #F5F3F3;
   border-radius: 5px;
@@ -401,4 +401,72 @@ font-weight: bold;
   width: 100%;
   height: 100%;
   border-radius: 5px;
+}
+
+
+/* Estilos para pantallas con un ancho máximo de 600px (teléfonos móviles) */
+@media only screen and (max-width: 600px) {
+  body {
+    display: block;
+    min-width: 100%;
+    min-height: 100vh;
+  }
+
+  .page, .container, .headLine {
+    min-width: 80%;
+  }
+  
+
+  .navbar {
+    margin-left: 10%;
+  }
+  .navbar button {
+    font-size: 18px;
+    width: 100%;
+  }
+
+  .title {
+    font-size: 30px;
+  }
+
+  .logo {
+    width: 50px;
+    height: 50px;
+  }
+
+  .form-field {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .form-field label, .form-field input, .form-field select, .form-field textarea {
+    font-size: 2dvh;
+    width: 90%;
+  }
+
+  .form-container {
+    display: block;
+  }
+
+  .submit {
+    width: 90%;
+  }
+
+  .carousel-Container {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .secondary-image {
+    width: 100%;
+  }
+
+  .main-image {
+    width: 100%;
+  }
+
+  .imageContSec {
+    height: auto;
+    margin-top: 0;
+  }
 }
