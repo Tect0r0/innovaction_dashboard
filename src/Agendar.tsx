@@ -61,7 +61,7 @@ export default function Agendar(){
 
                     <div className='form-field'>
                     <label htmlFor="fecha">Fecha y hora:</label>
-                        <input id="fecha" type="datetime-local" name="fecha" min="2024-01-01T00:00" max="2024-12-31T23:59" step="1"/>
+                        <input id="fecha" type="datetime-local" name="fecha" min="2024-01-01T00:00" max="2024-12-31T23:59" step="1" required/>
                     </div>
 
                     <div className='form-field'>
