@@ -3,7 +3,7 @@ import './Contacto.css'; // Importa tus estilos CSS
 export default function Contacto() {
     return (
         <div className='container'>
-            <div className='headLine' style={{height:"6.5vw"}}>
+            <div className='headLine'>
                 <h1>Contacto</h1>
             </div><br/>
             <div className="page">

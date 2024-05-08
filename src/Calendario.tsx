@@ -43,7 +43,7 @@ export default function Calendario() {
                     events={events}
                     startAccessor="start"
                     endAccessor="end"
-                    style={{ maxWidth: '800px', margin: '0 auto' }}
+                    style={{ maxWidth: '1000px', margin: '0 auto' }}
                 />
             </div>
         </div>

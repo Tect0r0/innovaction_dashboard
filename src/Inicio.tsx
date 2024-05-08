@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export default function Inicio() {
     const [mainImage, setMainImage] = useState('src/assets/imagen-Ino3.webp');

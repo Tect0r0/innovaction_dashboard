@@ -4,6 +4,8 @@ import Inicio from './Inicio'
 import Calendario from './Calendario'
 import Agendar from './Agendar'
 import Contacto from './Contacto'
+import { SignedIn } from "@clerk/clerk-react";
+
 
 type PageName = 'Inicio' | 'Calendario' | 'Agendar' | 'Contacto'; // Definir los nombres de las páginas
 
@@ -28,10 +30,12 @@ export default function Body() {
                 style={{color: page === "Calendario" ? "#00A3E0" : "", textDecoration: page === "Calendario" ? "underline" : ""}}
                 onClick={() => setPage("Calendario")}
                 ><strong>CALENDARIO</strong></button>
-                                <button 
-                style={{color: page === "Agendar" ? "#00A3E0" : "", textDecoration: page === "Agendar" ? "underline" : ""}}
-                onClick={() => setPage("Agendar")}
-                ><strong>AGENDAR EVENTO</strong></button>
+                <SignedIn>
+                    <button 
+                    style={{color: page === "Agendar" ? "#00A3E0" : "", textDecoration: page === "Agendar" ? "underline" : ""}}
+                    onClick={() => setPage("Agendar")}
+                    ><strong>AGENDAR EVENTO</strong></button>
+                </SignedIn>
                 <button 
                 style={{color: page === "Contacto" ? "#00A3E0" : "", textDecoration: page === "Contacto" ? "underline" : ""}}
                 onClick={() => setPage("Contacto")}
