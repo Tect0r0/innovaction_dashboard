@@ -46,5 +46,29 @@ def agendar_evento():
 
     return jsonify({'status': 'success'}), 200
 
+# Consutar eventos en base de datos
+@app.route('/eventos', methods=['GET'])
+def obtener_eventos():
+    try:
+        # Conectar a MySQL Server
+        conn = mysql.connector.connect(**config)
+        cursor = conn.cursor()
+
+        # Query que trae los los datos de la tabla eventos
+        cursor.execute("SELECT fecha_inicio, titulo_evento FROM eventos")
+        eventos = cursor.fetchall()
+
+        # Convertir resultados a una lista
+        eventos_list = [{'fecha_inicio': str(evento[0]), 'titulo_evento': evento[1]} for evento in eventos]
+    # Exepcion en caso de error
+    except mysql.connector.Error as err:
+        print("Something went wrong: {}".format(err))
+        return jsonify({'status': 'failure', 'error': str(err)}), 500
+
+    finally:
+        conn.close()
+    #Caso de exito
+    return jsonify({'status': 'success', 'eventos': eventos_list}), 200
+
 if __name__ == '__main__':
     app.run(debug=True)
