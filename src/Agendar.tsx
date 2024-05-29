@@ -22,7 +22,8 @@ export default function Agendar() {
       if (response.ok) {
         alert("Evento añadido con éxito");
       } else {
-        alert("Error al añadir evento");
+            const errorData = await response.json();
+            alert(`Error al añadir evento: ${errorData.error}`);
       }
     } catch (error) {
       console.error("Error al enviar el formulario:", error);

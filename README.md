@@ -27,3 +27,18 @@ fecha_fin DATETIME NOT NULL,
 nivel_ruido ENUM('Bajo', 'Medio', 'Alto') DEFAULT 'Bajo',
 descripcion_evento TEXT
 );
+
+## Python modules needed (copy + paste in terminal)
+pip install flask
+pip install flask_cors
+pip install mysql
+pip install mysql-connector-python
+
+## Run app:
+# Split terminal
+# Terminal 1:
+python agendar_evento.py
+
+# Terminal 2:
+npm i
+npm run dev

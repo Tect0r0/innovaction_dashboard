@@ -2,7 +2,6 @@ from flask import Flask, jsonify, request
 from flask_cors import CORS
 from datetime import datetime
 import mysql.connector
-import pyodbc
 
 app = Flask(__name__)
 CORS(app)
@@ -25,7 +24,7 @@ def agendar_evento():
 
         cursor = conn.cursor()
 
-        cursor.execute("INSERT INTO eventos (nombre_contacto, info_contacto, asociacion, ubicacion, titulo_evento, tipo_evento, fecha_inicio, fecha_fin, nivel_ruido, descripcion_evento) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)", 
+        cursor.execute("INSERT INTO eventos (nombre_contacto, info_contacto, asociacion, ubicacion, titulo_evento, tipo_evento, fecha_inicio, fecha_fin, nivel_ruido, descripcion_evento) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)", 
                     (request.json['nombre_contacto'], 
                      request.json['info_contacto'], 
                      request.json['asociacion'], 
