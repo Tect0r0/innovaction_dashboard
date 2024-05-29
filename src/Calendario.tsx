@@ -1,52 +1,67 @@
-import { useState } from 'react';
-import { Calendar, momentLocalizer } from 'react-big-calendar';
+import { useState, useEffect } from 'react';
+import { Calendar, momentLocalizer, Event as CalendarEvent, EventProps } from 'react-big-calendar';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import moment from 'moment';
 
 const localizer = momentLocalizer(moment);
 
-interface Event {
+interface Event extends CalendarEvent {
     title: string;
     start: Date;
     end: Date;
+    desc: string;
 }
 
-const eventos: Event[] = [
-    {
-        title: 'Evento 1',
-        start: new Date('2024-04-05T10:00:00'),
-        end: new Date('2024-04-05T12:00:00')
-    },
-    {
-        title: 'Evento 2',
-        start: new Date('2024-04-10T14:00:00'),
-        end: new Date('2024-04-10T16:00:00')
-    },
-    // Agrega más eventos según sea necesario
-];
+const EventComponent: React.FC<EventProps<Event>> = ({ event }) => (
+    <span>
+        <strong>{event.title}</strong>
+        <p>{event.desc}</p>
+    </span>
+);
 
 export default function Calendario() {
-    const [events] = useState<Event[]>(eventos);
+    const [events, setEvents] = useState<Event[]>([]);
+
+    useEffect(() => {
+        fetch('http://localhost:5000/eventos')
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    const fetchedEvents = data.eventos.map((evento: any) => ({
+                        title: evento.titulo_evento,
+                        start: new Date(evento.fecha_inicio),
+                        end: new Date(evento.fecha_fin),
+                        desc: evento.descripcion_evento
+                    }));
+                    setEvents(fetchedEvents);
+                } else {
+                    console.error('Failed to fetch events:', data.error);
+                }
+            })
+            .catch(error => console.error('An error occurred while fetching the events:', error));
+    }, []);
 
     return (
-        
         <div className='container'>
             <div className='headLine'>
                  <h1>Calendario </h1>
             </div>
             <br />
 
-        <div className="page">
-            <div style={{ height: 500 }}>
-                <Calendar
-                    localizer={localizer}
-                    events={events}
-                    startAccessor="start"
-                    endAccessor="end"
-                    style={{ maxWidth: '1000px', margin: '0 auto' }}
-                />
+            <div className="page">
+                <div style={{ height: 500 }}>
+                    <Calendar
+                        localizer={localizer}
+                        events={events}
+                        startAccessor="start"
+                        endAccessor="end"
+                        style={{ maxWidth: '1000px', margin: '0 auto' }}
+                        components={{
+                            event: EventComponent
+                        }}
+                    />
+                </div>
             </div>
         </div>
-    </ div>
     );
 }
