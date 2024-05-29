@@ -13,13 +13,14 @@ Este Dashboard fue creado con el fin de desplegar los eventos que tomarán lugar
 ## Codigo MYSQL
 CREATE TABLE eventos (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    titulo VARCHAR(255) NOT NULL,
-    descripcion TEXT,
+    nombre_contacto VARCHAR(50),
+    info_contacto VATCHAR(100),
+    asociacion VARCHAR(255),
+    ubicacion VARCHAR(255),
+    titulo_evento VARCHAR(255) NOT NULL,
+    tipo_evento VARCHAR(50),
     fecha_inicio DATETIME NOT NULL,
     fecha_fin DATETIME NOT NULL,
-    ubicacion VARCHAR(255),
-    grupo_estudiantil VARCHAR(255),
     nivel_ruido ENUM('Bajo', 'Medio', 'Alto') DEFAULT 'Bajo',
-    fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    fecha_actualizacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+    descripcion_evento TEXT,
 );
