@@ -46,3 +46,6 @@ def agendar_evento():
         conn.close()
 
     return jsonify({'status': 'success'}), 200
+
+if __name__ == '__main__':
+    app.run(debug=True)
