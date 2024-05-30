@@ -56,12 +56,14 @@ def obtener_eventos():
         cursor = conn.cursor()
 
         # Query que trae los los datos de la tabla eventos
+
         cursor.execute("SELECT fecha_inicio, fecha_fin, titulo_evento, descripcion_evento FROM eventos")
+
         eventos = cursor.fetchall()
 
         # Convertir resultados a una lista
         eventos_list = [{'fecha_inicio': str(evento[0]), 'titulo_evento': evento[1]} for evento in eventos]
-    
+
     # Exepcion en caso de error
     except mysql.connector.Error as err:
         print("Something went wrong: {}".format(err))
