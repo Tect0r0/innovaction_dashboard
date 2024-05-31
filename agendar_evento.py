@@ -8,10 +8,10 @@ CORS(app)
 
 config = { # Configuracion de MySQL server
         'user': 'root',
-        'password': 'BalooMowgli48.',          #'12345',
+        'password': '12345',          #'12345',
         'host': 'localhost',
         'port': 3306,
-        'database': 'inovaction', #'innovaction',
+        'database': 'innovaction', #'innovaction',
         'raise_on_warnings': True
 }
 
