@@ -8,10 +8,10 @@ CORS(app)
 
 config = { # Configuracion de MySQL server
         'user': 'root',
-        'password': '12345',
+        'password': 'BalooMowgli48.',          #'12345',
         'host': 'localhost',
         'port': 3306,
-        'database': 'innovaction',
+        'database': 'inovaction', #'innovaction',
         'raise_on_warnings': True
 }
 
@@ -57,12 +57,20 @@ def obtener_eventos():
 
         # Query que trae los los datos de la tabla eventos
 
-        cursor.execute("SELECT fecha_inicio, fecha_fin, titulo_evento, descripcion_evento FROM eventos")
+        cursor.execute("SELECT fecha_inicio, fecha_fin, titulo_evento, asociacion, ubicacion  FROM eventos")
 
         eventos = cursor.fetchall()
 
         # Convertir resultados a una lista
-        eventos_list = [{'fecha_inicio': str(evento[0]), 'titulo_evento': evento[1]} for evento in eventos]
+        eventos_list = [
+            {
+                'fecha_inicio': evento[0].strftime('%Y-%m-%dT%H:%M:%S'),  # formato ISO 8601
+                'fecha_fin': evento[1].strftime('%Y-%m-%dT%H:%M:%S'),
+                'titulo_evento': evento[2],
+                'asociacion': evento[3],
+                'ubicacion': evento[4]
+            } for evento in eventos
+            ]
 
     # Exepcion en caso de error
     except mysql.connector.Error as err:

@@ -10,12 +10,14 @@ interface Event extends CalendarEvent {
     start: Date;
     end: Date;
     desc: string;
+    asociacion: string;
 }
 
 const EventComponent: React.FC<EventProps<Event>> = ({ event }) => (
     <span>
         <strong>{event.title}</strong>
         <p>{event.desc}</p>
+        <p>{event.asociacion}</p>
     </span>
 );
 
@@ -31,7 +33,8 @@ export default function Calendario() {
                         title: evento.titulo_evento,
                         start: new Date(evento.fecha_inicio),
                         end: new Date(evento.fecha_fin),
-                        desc: evento.descripcion_evento
+                        desc: evento.ubicacion,
+                        asociacion: evento.asociacion
                     }));
                     setEvents(fetchedEvents);
                 } else {
