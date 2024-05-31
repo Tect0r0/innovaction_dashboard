@@ -3,9 +3,9 @@ header("Content-Type: application/json");
 
 // Datos de conexión a la base de datos
 $servidor = "localhost";
-$usuario = "tu_usuario";
-$contraseña = "tu_contraseña";
-$base_datos = "nombre_de_tu_base_de_datos";
+$usuario = "root";
+$contraseña = "BalooMowgli48.";
+$base_datos = "inovaction";
 
 // Crear conexión
 $conn = new mysqli($servidor, $usuario, $contraseña, $base_datos);
