@@ -270,8 +270,8 @@ font-weight: bold;
   font-size: 4dvh;
   font-weight: 500;
   font-family: Roboto;
-  color: black;
-  margin-top: 10px;
+  color: #0054a8;
+  margin-top: 30px;
   font-style: bold;
   text-align: left;
   margin-left: 9.5%;
@@ -279,8 +279,9 @@ font-weight: bold;
 .form-field input{
   font-size: 3dvh;
   font-family: inherit;
-  background-color: #F5F3F3;
-  border-radius: 5px;
+  background-color: transparent;
+  border: none;
+  border-bottom: 2px solid #00A3E0; /* Línea en lugar de caja */
   color: black;
   width: 80%;
   height: 30px;
@@ -289,8 +290,9 @@ font-weight: bold;
 .form-field select{
   font-size: 2.2vh;
   font-family: inherit;
-  background-color: #F5F3F3;
-  border-radius: 5px;
+  background-color: transparent;
+  border: none;
+  border-bottom: 2px solid #00A3E0; /* Línea en lugar de caja */
   color: black;
   width: 80%;
   height: 30px;
@@ -299,8 +301,9 @@ font-weight: bold;
 .form-field textarea{
   font-size: 3dvh;
   font-family: inherit;
-  background-color: #F5F3F3;
-  border-radius: 5px;
+  background-color: transparent;
+  border: none;
+  border-bottom: 2px solid #00A3E0; /* Línea en lugar de caja */
   color: black;
   width: 80%;
   height: 80px;
@@ -327,7 +330,7 @@ font-weight: bold;
   background-color: #00A3E0;
   color: white;
   border: none;
-  border-radius: 5px;
+  border-radius: 100px;
   padding: 10px;
   font-size: 3.5dvb;
   font-weight: 500;
@@ -469,4 +472,84 @@ font-weight: bold;
     height: auto;
     margin-top: 0;
   }
+}
+
+/* Estilos específicos para iPhone 14 Pro Max */
+@media only screen and (max-width: 430px) and (max-width: 932px) {
+  body {
+    display: block;
+    margin: 0;
+    padding: 0;
+  }
+
+  .headLine {
+    padding: 10px;
+  }
+
+  .page{
+    max-height: 100%;
+  }
+
+  .navbar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: auto;
+    padding: 10px;
+    margin-left: 0;
+  }
+
+  .navbar button {
+    font-size: 17px;
+    width: 100%;
+    text-align: left;
+    padding: 10px;
+    margin: 5px 0;
+  }
+
+  .title {
+    font-size: 25px;
+  }
+
+  .logo {
+    width: 40px;
+    height: 40px;
+  }
+
+
+  .carousel-Container{
+    margin-left: 0;
+  }
+
+
+  .secondary-image{
+    width: 20%;
+  }
+  
+  .main-image{
+    width: 100%;
+    background-color: aqua;
+    border-radius: 5px;
+  
+  }
+  
+  .imageContSec{
+    height: 80%;
+    margin-top: 26%;
+    border-radius: 5px;
+  }
+  
+  .secImg{
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+    opacity: 0.6;
+  }
+  
+  .mainImg{
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+  }
+
 }
