@@ -93,9 +93,6 @@ export default function Agendar() {
                 <option id="esferas" value="esferas">
                   Esferas
                 </option>
-                <option id="misenina" value="misenina">
-                  Misenina
-                </option>
                 <option id="makerspace" value="makerspace">
                   Maker Space
                 </option>
@@ -177,6 +174,10 @@ export default function Agendar() {
                 required
               />
             </div>
+
+            
+
+            
 
             <div className="form-field">
               <label htmlFor="nivel_">Nivel de ruido:</label>
