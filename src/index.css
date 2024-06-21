@@ -50,24 +50,27 @@ table{
   border-style: solid;
   border-color: black;
   border-width: 1px;
+  font-family: Poppins;
 }
 
 th{
   border-style: solid;
-  border-color: yellow;
-  border-width: 1px;
+  border-color: rgb(0, 68, 255);
+  border-width: 3px;
   width: 30px;
   height: 30px;
   padding: 2px;
+  font-family: Poppins;
 }
 
 td{
   border-style: solid;
-  border-color: red;
-  border-width: 1px;
+  border-color: rgb(17, 0, 255);
+  border-width: 3px;
   min-width: 30px;
   height: 30px;
   padding: 2px;
+  font-family: Poppins;
 
 }
 
