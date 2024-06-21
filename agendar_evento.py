@@ -21,20 +21,52 @@ def agendar_evento():
     try:
         # Connect to MySQL Server
         conn = mysql.connector.connect(**config)
-
         cursor = conn.cursor()
 
+        # Obtener datos del request
+        nombre_contacto = request.json['nombre_contacto']
+        info_contacto = request.json['info_contacto']
+        asociacion = request.json['asociacion']
+        ubicacion = request.json['ubicacion']
+        titulo_evento = request.json['titulo_evento']
+        tipo_evento = request.json['tipo_evento']
+        fecha_inicio = request.json['fecha_inicio']
+        fecha_fin = request.json['fecha_fin']
+        usuarios_estimados = request.json['usuarios_estimados']
+        descripcion_evento = request.json['descripcion_evento']
+
+        # Verificar si ya hay un evento en la misma ubicación y hora
+        query = """
+        SELECT COUNT(*) FROM eventos 
+        WHERE ubicacion = %s 
+        AND (
+            (fecha_inicio <= %s AND fecha_fin >= %s) OR
+            (fecha_inicio <= %s AND fecha_fin >= %s) OR
+            (%s <= fecha_inicio AND %s >= fecha_inicio)
+        )
+        """
+        cursor.execute(query, (ubicacion, fecha_inicio, fecha_inicio, fecha_fin, fecha_fin, fecha_inicio, fecha_fin))
+        count = cursor.fetchone()[0]
+
+        # Verificar si hay conflicto en la ubicación general
+        query_general = """
+        SELECT COUNT(*) FROM eventos 
+        WHERE ubicacion = 'Todo Innovaction' 
+        AND (
+            (fecha_inicio <= %s AND fecha_fin >= %s) OR
+            (fecha_inicio <= %s AND fecha_fin >= %s) OR
+            (%s <= fecha_inicio AND %s >= fecha_inicio)
+        )
+        """
+        cursor.execute(query_general, (fecha_inicio, fecha_inicio, fecha_fin, fecha_fin, fecha_inicio, fecha_fin))
+        count_general = cursor.fetchone()[0]
+
+        if count > 0 or count_general > 0:
+            return jsonify({'status': 'failure', 'error': 'Conflicting event in the same location and time'}), 409
+
+        # Insertar el nuevo evento si no hay conflictos
         cursor.execute("INSERT INTO eventos (nombre_contacto, info_contacto, asociacion, ubicacion, titulo_evento, tipo_evento, fecha_inicio, fecha_fin, usuarios_estimados, descripcion_evento) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)", 
-                    (request.json['nombre_contacto'], 
-                     request.json['info_contacto'], 
-                     request.json['asociacion'], 
-                     request.json['ubicacion'], 
-                     request.json['titulo_evento'], 
-                     request.json['tipo_evento'],
-                     request.json['fecha_inicio'], 
-                     request.json['fecha_fin'], 
-                     request.json['usuarios_estimados'], 
-                     request.json['descripcion_evento']))
+                        (nombre_contacto, info_contacto, asociacion, ubicacion, titulo_evento, tipo_evento, fecha_inicio, fecha_fin, usuarios_estimados, descripcion_evento))
         conn.commit()
 
     except mysql.connector.Error as err:
@@ -45,6 +77,7 @@ def agendar_evento():
         conn.close()
 
     return jsonify({'status': 'success'}), 200
+
 
 # Consutar eventos en base de datos
 @app.route('/eventos', methods=['GET'])
