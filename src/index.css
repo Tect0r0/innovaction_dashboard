@@ -431,6 +431,52 @@ font-weight: bold;
 
 
 
+/*Estilos para el PopUp y Calendario*/
+
+.popUp{
+ position: fixed;
+ top: -10%;
+ left: 50%;
+ transform: translate(-50%, 60%);
+ background-color: #85B6FF;
+ padding: 20px;
+ z-index: 1000;
+ border-radius: 25px;
+ box-shadow: 0px 0px 20px 0px rgba(8, 103, 212, 0.425);
+ border: rgb(220, 242, 252) 2px solid;
+}
+
+.popUp h2{
+  font-size: 2em;
+  color: rgb(0, 0, 0);
+  margin-bottom: 0px;
+  margin-top: 0px;
+
+}
+
+.cerrar{
+  position: absolute;
+  top: 20px;
+  right: 15px;
+  border: none;
+  color: white;
+  cursor: pointer;
+  background-color: #005ae000;
+  transition: 0.4s;
+
+}
+
+.cerrar:hover{
+  background-color: #00a4e000;
+  scale: 1.15;
+}
+
+.cerrar img{
+  width: 20px;
+  height: 20px;
+  background-color: none;
+}
+
 /* Estilos para pantallas con un ancho máximo de 600px (teléfonos móviles) */
 @media only screen and (max-width: 600px) {
   body {
