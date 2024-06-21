@@ -50,7 +50,7 @@ export default function Agendar() {
                 required
                 autoComplete="off"
               />
-            </div>
+            </div> 
 
             <div className="form-field">
               <label htmlFor="info_contacto">Correo o teléfono:</label>
@@ -87,23 +87,23 @@ export default function Agendar() {
                 <option value="" selected disabled hidden>
                   -Eliga un espacio-
                 </option>
-                <option id="fractal" value="fractal">
+                <option id="fractal" value="Fractal">
                   Fractal
                 </option>
-                <option id="esferas" value="esferas">
+                <option id="esferas" value="Esferas">
                   Esferas
                 </option>
-                <option id="makerspace" value="makerspace">
+                <option id="makerspace" value="Makerspace">
                   Maker Space
                 </option>
-                <option id="sparring" value="sparring">
+                <option id="sparring" value="Sparring">
                   Sparring
                 </option>
-                <option id="todo" value="todo">
+                <option id="todo" value="Todo Innovaction">
                   Todo el Innovaction
                 </option>
-                <option id="otro" value="otro">
-                  Otro
+                <option id="atenas" value="Atenas">
+                  Atenas
                 </option>
               </select>
             </div>
@@ -180,21 +180,15 @@ export default function Agendar() {
             
 
             <div className="form-field">
-              <label htmlFor="nivel_">Nivel de ruido:</label>
-              <select id="nivel_ruido" name="nivel_ruido" required>
-                <option value="" selected disabled hidden>
-                  -Eliga un nivel de ruido-
-                </option>
-                <option id="bajo" value="bajo">
-                  Bajo
-                </option>
-                <option id="medio" value="medio">
-                  Medio
-                </option>
-                <option id="alto" value="alto">
-                  Alto
-                </option>
-              </select>
+              <label htmlFor="usuarios_estimados">Usuarios Estimados:</label>
+              <input
+                id="usuarios_estimados"
+                type="number"
+                name="usuarios_estimados"
+                placeholder="Ingrese el número de usuarios estimados"
+                required
+                autoComplete="off"
+              />
             </div>
 
             <div className="form-field">

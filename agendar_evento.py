@@ -24,7 +24,7 @@ def agendar_evento():
 
         cursor = conn.cursor()
 
-        cursor.execute("INSERT INTO eventos (nombre_contacto, info_contacto, asociacion, ubicacion, titulo_evento, tipo_evento, fecha_inicio, fecha_fin, nivel_ruido, descripcion_evento) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)", 
+        cursor.execute("INSERT INTO eventos (nombre_contacto, info_contacto, asociacion, ubicacion, titulo_evento, tipo_evento, fecha_inicio, fecha_fin, usuarios_estimados, descripcion_evento) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)", 
                     (request.json['nombre_contacto'], 
                      request.json['info_contacto'], 
                      request.json['asociacion'], 
@@ -33,7 +33,7 @@ def agendar_evento():
                      request.json['tipo_evento'],
                      request.json['fecha_inicio'], 
                      request.json['fecha_fin'], 
-                     request.json['nivel_ruido'], 
+                     request.json['usuarios_estimados'], 
                      request.json['descripcion_evento']))
         conn.commit()
 
@@ -57,7 +57,7 @@ def obtener_eventos():
 
         # Query que trae los los datos de la tabla eventos
 
-        cursor.execute("SELECT fecha_inicio, fecha_fin, titulo_evento, asociacion, ubicacion  FROM eventos")
+        cursor.execute("SELECT fecha_inicio, fecha_fin, titulo_evento, asociacion, ubicacion, descripcion_evento  FROM eventos")
 
         eventos = cursor.fetchall()
 
@@ -68,10 +68,12 @@ def obtener_eventos():
                 'fecha_fin': evento[1].strftime('%Y-%m-%dT%H:%M:%S'),
                 'titulo_evento': evento[2],
                 'asociacion': evento[3],
-                'ubicacion': evento[4]
+                'ubicacion': evento[4], 
+                'descripcion_evento': evento[5]
+
             } for evento in eventos
             ]
-
+ 
     # Exepcion en caso de error
     except mysql.connector.Error as err:
         print("Something went wrong: {}".format(err))
