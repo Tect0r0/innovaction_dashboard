@@ -2,6 +2,8 @@
 import React, { useState, useEffect } from 'react';
 import './Reporte.css'; // Importa tus estilos CSS
 
+
+
 function Reporte() {
     interface Evento {
         id: number;

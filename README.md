@@ -24,8 +24,9 @@ titulo_evento VARCHAR(255) NOT NULL,
 tipo_evento VARCHAR(50),
 fecha_inicio DATETIME NOT NULL,
 fecha_fin DATETIME NOT NULL,
-nivel_ruido ENUM('Bajo', 'Medio', 'Alto') DEFAULT 'Bajo',
-descripcion_evento TEXT
+usuarios_estimados int NOT null,
+descripcion_evento TEXT,
+asistencias_confirmadas int NOT NULL
 );
 
 ## Python modules needed (copy + paste in terminal)
