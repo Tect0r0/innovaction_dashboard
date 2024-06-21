@@ -17,18 +17,17 @@ interface Event extends CalendarEvent {
 function getColorByLocation(location: string): string {
     switch (location) {
         case 'Todo Innovaction':
-            return '#444FAF'; // Azul oscuro
+            return '#444FAF'; 
         case 'Makerspace':
-            return '#FF5305'; // Naranja
-        // Agrega más ubicaciones y colores según sea necesario
+            return '#FF5305'; 
         case 'Fractal':
-            return '#E12626'; // Amarillo
+            return '#E12626'; 
         case 'Esferas':
-            return '#019AF0'; // Rojo
+            return '#019AF0'; 
         case 'Sparring':
-            return '#23A330'; // Morado
+            return '#23A330'; 
         case 'Atenas':
-            return '#5D3E6B'; // Azul claro
+            return '#5D3E6B';
         default:
             return '#757575'; // Gris por defecto
     }
@@ -127,7 +126,6 @@ function eventStyleGetter(event: Event) {
             color: 'white',
             border: '0px',
             
-         
            // textAlign: 'center', //genera un error pero sigue jalando xd
         }
     };

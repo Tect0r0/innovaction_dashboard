@@ -29,6 +29,7 @@
     padding-top: 1px;
 }
 
+
 .table-container {
     width: 100%;
     overflow-x: auto; /* Añade desplazamiento horizontal */
@@ -38,20 +39,26 @@ table {
     width: 100%;
     border-collapse: collapse;
     margin-bottom: 20px;
+    background-color:none;
+    margin-top: 2%;
+    border-radius: 25px;
+    height: 70vh;
 }
 
-table, th, td {
-    border: 1px solid #ddd;
+.tablee thead {
+
+    background-color: #daeaf1;
+
+    
 }
 
-th, td {
-    padding: 8px;
-    text-align: left;
+.tablee  td {
+  border-width: 2px;
+  font-size: 1.05em;
+ 
 }
 
-th {
-    background-color: #f2f2f2;
-}
+
 
 .chart-container {
     display: flex;
@@ -68,6 +75,26 @@ th {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+
+.edit {
+    background-color: #097ffdfb;
+    cursor: pointer;
+    border-radius: 25px;
+    border: none;
+    box-shadow : 0 3px 4px rgba(81, 157, 228, 0.651);
+
+}
+
+.inputt {
+    width: 70%;
+    padding: 2px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+    text-align: center;
+    box-shadow : 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
 @media only screen and (max-width: 430px)  {
     .headLine {
         height: auto;
@@ -78,3 +105,4 @@ th {
     }
 
 }
+

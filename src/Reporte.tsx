@@ -48,8 +48,9 @@ function Reporte() {
     };
 
     const renderEventos = () => (
+
         <div className="table-container">
-            <table>
+            <table className='tablee'>
                 <thead>
                     <tr>
                         <th>Nombre Contacto</th>
