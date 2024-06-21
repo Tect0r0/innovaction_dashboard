@@ -371,7 +371,7 @@ font-weight: bold;
   height: 400px;
   position: relative;
   overflow: hidden;  
-  margin: 0 auto;
+  margin: 0 auto; 
 }
 .slider .list{
   position: absolute;
@@ -531,13 +531,13 @@ font-weight: bold;
 /* Estilos específicos para iPhone 14 Pro Max */
 @media only screen and (max-width: 430px) and (max-width: 932px) {
   body {
-    display: block;
+    display: flex;
     margin: 0;
     padding: 0;
   }
 
-  .headLine {
-    padding: 10px;
+  .headLine h1 {
+    font-size: 24px;
   }
 
   .page{
@@ -554,7 +554,7 @@ font-weight: bold;
   }
 
   .navbar button {
-    font-size: 17px;
+    font-size: 10px;
     width: 100%;
     text-align: left;
     padding: 10px;
@@ -584,6 +584,10 @@ font-weight: bold;
     padding: 0px;
   }
 
+  .headLine h1 {
+    font-size: 24px;
+  }
+
   .page{
     max-height: 100%;
   }
@@ -598,7 +602,7 @@ font-weight: bold;
   }
 
   .navbar button {
-    font-size: 15px;
+    font-size: 10px;
     width: 100%;
     text-align: left;
     padding: 10px;
@@ -640,7 +644,7 @@ font-weight: bold;
   }
 
   .navbar button {
-    font-size: 15px;
+    font-size: 10px;
     width: 100%;
     text-align: left;
     padding: 10px;

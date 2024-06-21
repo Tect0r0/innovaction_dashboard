@@ -48,48 +48,50 @@ function Reporte() {
     };
 
     const renderEventos = () => (
-        <table>
-            <thead>
-                <tr>
-                    <th>Nombre Contacto</th>
-                    <th>Info de Contacto</th>
-                    <th>Asociación</th>
-                    <th>Ubicación</th>
-                    <th>Título del Evento</th>
-                    <th>Tipo de Evento</th>
-                    <th>Fecha Inicio</th>
-                    <th>Fecha Fin</th>
-                    <th>Usuarios Estimados</th>
-                    <th>Descripción Evento</th>
-                    <th>Asistencias Confirmadas</th>
-                    <th>Actualizar</th>
-                </tr>
-            </thead>
-            <tbody>
-                {eventos.map(evento => (
-                    <tr key={evento.id}>
-                        <td>{evento.nombre_contacto}</td>
-                        <td>{evento.info_contacto}</td>
-                        <td>{evento.asociacion}</td>
-                        <td>{evento.ubicacion}</td>
-                        <td>{evento.titulo_evento}</td>
-                        <td>{evento.tipo_evento}</td>
-                        <td>{new Date(evento.fecha_inicio).toLocaleString()}</td>
-                        <td>{new Date(evento.fecha_fin).toLocaleString()}</td>
-                        <td>{evento.usuarios_estimados}</td>
-                        <td>{evento.descripcion_evento}</td>
-                        <td>
-                            <input
-                                type="number"
-                                defaultValue={evento.asistencias_confirmadas}
-                                onBlur={(e) => handleEdit(evento.id, Number(e.target.value))}
-                            />
-                        </td>
-                        <td><button onClick={() => handleEdit(evento.id)}>Editar</button></td>
+        <div className="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nombre Contacto</th>
+                        <th>Info de Contacto</th>
+                        <th>Asociación</th>
+                        <th>Ubicación</th>
+                        <th>Título del Evento</th>
+                        <th>Tipo de Evento</th>
+                        <th>Fecha Inicio</th>
+                        <th>Fecha Fin</th>
+                        <th>Usuarios Estimados</th>
+                        <th>Descripción Evento</th>
+                        <th>Asistencias Confirmadas</th>
+                        <th>Actualizar</th>
                     </tr>
-                ))}
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    {eventos.map(evento => (
+                        <tr key={evento.id}>
+                            <td>{evento.nombre_contacto}</td>
+                            <td>{evento.info_contacto}</td>
+                            <td>{evento.asociacion}</td>
+                            <td>{evento.ubicacion}</td>
+                            <td>{evento.titulo_evento}</td>
+                            <td>{evento.tipo_evento}</td>
+                            <td>{new Date(evento.fecha_inicio).toLocaleString()}</td>
+                            <td>{new Date(evento.fecha_fin).toLocaleString()}</td>
+                            <td>{evento.usuarios_estimados}</td>
+                            <td>{evento.descripcion_evento}</td>
+                            <td>
+                                <input
+                                    type="number"
+                                    defaultValue={evento.asistencias_confirmadas}
+                                    onBlur={(e) => handleEdit(evento.id, Number(e.target.value))}
+                                />
+                            </td>
+                            <td><button onClick={() => handleEdit(evento.id)}>Editar</button></td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
+        </div>
     );
 
     const renderResultados = () => (

@@ -29,6 +29,11 @@
     padding-top: 1px;
 }
 
+.table-container {
+    width: 100%;
+    overflow-x: auto; /* Añade desplazamiento horizontal */
+}
+
 table {
     width: 100%;
     border-collapse: collapse;
@@ -61,4 +66,15 @@ th {
     margin: 10px;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+@media only screen and (max-width: 430px)  {
+    .headLine {
+        height: auto;
+    }
+    
+    .chart {
+        flex: 1 1 100%;
+    }
+
 }
