@@ -35,6 +35,8 @@
     margin-bottom: 20px;
     background-color:none;
     margin-top: 2%;
+    border-radius: 25px;
+    height: 70vh;
 }
 
 .tablee thead {
@@ -44,6 +46,11 @@
     
 }
 
+.tablee  td {
+  border-width: 2px;
+  font-size: 1.05em;
+ 
+}
 
 
 
@@ -60,4 +67,23 @@
     margin: 10px;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.edit {
+    background-color: #097ffdfb;
+    cursor: pointer;
+    border-radius: 25px;
+    border: none;
+    box-shadow : 0 3px 4px rgba(81, 157, 228, 0.651);
+
+}
+
+.inputt {
+    width: 70%;
+    padding: 2px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+    text-align: center;
+    box-shadow : 0 2px 4px rgba(0, 0, 0, 0.1);
 }

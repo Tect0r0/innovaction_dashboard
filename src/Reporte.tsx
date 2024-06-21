@@ -81,12 +81,13 @@ function Reporte() {
                         <td>{evento.descripcion_evento}</td>
                         <td>
                             <input
+                            className='inputt'
                                 type="number"
                                 defaultValue={evento.asistencias_confirmadas}
                                 onBlur={(e) => handleEdit(evento.id, Number(e.target.value))}
                             />
                         </td>
-                        <td><button onClick={() => handleEdit(evento.id)}>Editar</button></td>
+                        <td><button className='edit'onClick={() => handleEdit(evento.id)}>Editar</button></td>
                     </tr>
                 ))}
             </tbody>
