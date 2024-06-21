@@ -29,7 +29,13 @@
     padding-top: 1px;
 }
 
-.tablee {
+
+.table-container {
+    width: 100%;
+    overflow-x: auto; /* Añade desplazamiento horizontal */
+}
+
+table {
     width: 100%;
     border-collapse: collapse;
     margin-bottom: 20px;
@@ -69,6 +75,7 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+
 .edit {
     background-color: #097ffdfb;
     cursor: pointer;
@@ -87,3 +94,15 @@
     text-align: center;
     box-shadow : 0 2px 4px rgba(0, 0, 0, 0.1);
 }
+
+@media only screen and (max-width: 430px)  {
+    .headLine {
+        height: auto;
+    }
+    
+    .chart {
+        flex: 1 1 100%;
+    }
+
+}
+
