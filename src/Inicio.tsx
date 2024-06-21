@@ -1,50 +1,80 @@
-import { useEffect, useState } from 'react';
-
 export default function Inicio() {
-    const [mainImage, setMainImage] = useState('src/assets/imagen-Ino3.webp');
-    const [leftImage, setLeftImage] = useState('src/assets/imagen-Ino2.webp');
-    const [rightImage, setRightImage] = useState('src/assets/imagen-Ino1.webp');
+    let slider = document.querySelector('.slider .list') as HTMLElement | null;
+    let items = Array.from(document.querySelectorAll('.slider .list .item')) as HTMLElement[];
+    let next = document.getElementById('next') as HTMLButtonElement | null;
+    let prev = document.getElementById('prev') as HTMLButtonElement | null;
+    let dots = document.querySelectorAll('.slider .dots li');
+    
+    let lengthItems = items.length - 1;
+    let active = 0;
+    if (next) {
+        next.onclick = function(){
+            active = active + 1 <= lengthItems ? active + 1 : 0;
+            reloadSlider();
+        }
+    }
+    if (prev) {
+        prev.onclick = function(){
+            active = active - 1 >= 0 ? active - 1 : lengthItems;
+            reloadSlider();
+        }
+    }
+    let refreshInterval = setInterval(()=> {if (next) next.click()}, 3000);
+    function reloadSlider(){
+        if (slider && items[active]) {
+            slider.style.left = -items[active].offsetLeft + 'px';
+        }
+        // 
+        let last_active_dot = document.querySelector('.slider .dots li.active');
+        if (last_active_dot) {
+            last_active_dot.classList.remove('active');
+        }
+        if (dots[active]) {
+            dots[active].classList.add('active');
+        }
+    
+        clearInterval(refreshInterval);
+        refreshInterval = setInterval(()=> {if (next) next.click()}, 3000);
+    }
+    
+    dots.forEach((li, key) => {
+        li.addEventListener('click', ()=>{
+            active = key;
+            reloadSlider();
+        })
+    })
+    window.onresize = function(_event) {
+        reloadSlider();
+    };
 
-    useEffect(() => {
-        const timer = setInterval(() => {
-            setMainImage(prevMainImage => {
-                setRightImage(prevMainImage);
-                return leftImage;
-            });
-            setLeftImage(prevLeftImage => {
-                setMainImage(prevLeftImage);
-                return rightImage;
-            });
-            setRightImage(prevRightImage => {
-                setLeftImage(prevRightImage);
-                return mainImage;
-            });
-        }, 3000);
 
-        return () => clearInterval(timer); // Limpiar el intervalo cuando el componente se desmonte
-    }, [mainImage, leftImage, rightImage]);
 
     return (
         <div className="page">
             <h1 className="tit-inicio">CONVIERTE TUS IDEAS EN INOVACIÓN</h1>
             <br />
 
-            <div className='carousel-Container'>
-                <div className='secondary-image'>
-                    <div id='leftImage' className='imageContSec'>
-                        <img className='secImg'src={leftImage} alt="Imagen izquierda" />
+            <div className="slider">
+                <div className="list">
+                    <div className="item">
+                        <img src="src/assets/imagen-Ino3.webp" alt="" />
+                    </div>
+                    <div className="item">
+                        <img src="src/assets/imagen-Ino2.webp" alt="" />
+                    </div>
+                    <div className="item">
+                        <img src="src/assets/imagen-Ino1.webp" alt="" />
                     </div>
                 </div>
-
-                <div id='mainImage' className='main-image'>
-                    <img className='mainImg' src={mainImage} alt="Imagen principal" />
+                <div className="buttons">
+                    <button id="prev">&lt;</button>
+                    <button id="next">&gt;</button>
                 </div>
-
-                <div id='RightImage' className='secondary-image'>
-                    <div className='imageContSec'>
-                        <img className='secImg' src={rightImage} alt="Imagen derecha" />
-                    </div>
-                </div>
+                <ul className="dots">
+                    <li className="active"></li>
+                    <li></li>
+                    <li></li>
+                </ul>
             </div>
 
             <div className="text-container">
