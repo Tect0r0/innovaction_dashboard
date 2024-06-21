@@ -411,7 +411,7 @@ font-weight: bold;
 
 .popUp{
  position: fixed;
- top: 20%;
+ top: -10%;
  left: 50%;
  transform: translate(-50%, 60%);
  background-color: #85B6FF;
