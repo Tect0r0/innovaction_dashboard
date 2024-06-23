@@ -12,6 +12,13 @@ Este Dashboard fue creado con el fin de desplegar los eventos que tomarán lugar
 - Isaac Rojas Sosa (isaacrojassosa@gmail.com / a01198693@tec.mx)
 - Saúl Emilio Delgado Garza (saul10emilio@gmail.com/ a01285188@tec.mx)
 
+## Tech Stack
+- React
+- Vite
+- TypeScript
+- Flask
+- MySQL
+
 ## Codigo MYSQL
 
 CREATE TABLE eventos (
