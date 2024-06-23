@@ -18,6 +18,7 @@ Este Dashboard fue creado con el fin de desplegar los eventos que tomarán lugar
 - TypeScript
 - Flask
 - MySQL
+- CSS
 
 ## Codigo MYSQL
 
