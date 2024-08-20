@@ -131,19 +131,19 @@ export default function Agendar() {
                 <option value="" selected disabled hidden>
                   -Eliga un tipo de evento-
                 </option>
-                <option id="conferencia" value="conferencia">
+                <option id="conferencia" value="Conferencia">
                   Conferencia
                 </option>
-                <option id="taller" value="taller">
+                <option id="taller" value="Taller">
                   Taller
                 </option>
-                <option id="convivio" value="convivio">
+                <option id="convivio" value="Convivio">
                   Convivio Social
                 </option>
-                <option id="clase" value="clase">
+                <option id="clase" value="Clase">
                   Clase
                 </option>
-                <option id="otro" value="otro">
+                <option id="otro" value="Otro">
                   Otro
                 </option>
               </select>
