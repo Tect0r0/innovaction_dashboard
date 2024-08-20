@@ -1,5 +1,6 @@
 // Reporte.js
 import React, { useState, useEffect } from 'react';
+import UsuariosVsAsistenciasChart from './UsuariosVsAsistenciasChart';
 import './Reporte.css'; // Importa tus estilos CSS
 
 
@@ -99,29 +100,30 @@ function Reporte() {
     );
 
     const renderResultados = () => (
-        <div>
-            {/* Aquí puedes agregar el código para renderizar las gráficas y otros datos */}
-            <h2>Resultados</h2>
-            {/* Ejemplo de gráficos */}
-            <div className="chart-container">
-                <div className="chart">
-                    <h3>Porcentaje de usados</h3>
-                    {/* Código para el gráfico de porcentaje de usados */}
-                </div>
-                <div className="chart">
-                    <h3>Eventos por tipo de evento</h3>
-                    {/* Código para el gráfico de eventos por tipo de evento */}
-                </div>
-                <div className="chart">
-                    <h3>Asistencias estimadas vs confirmadas</h3>
-                    {/* Código para el gráfico de asistencias estimadas vs confirmadas */}
-                </div>
-                <div className="chart">
-                    <h3>Eventos por Lugar</h3>
-                    {/* Código para el gráfico de eventos por lugar */}
-                </div>
-            </div>
+      <div>
+        {/* Aquí puedes agregar el código para renderizar las gráficas y otros datos */}
+        <h2>Resultados</h2>
+        {/* Ejemplo de gráficos */}
+        <div className="chart-container">
+          <div className="chart">
+            <h3>Porcentaje de usados</h3>
+            {/* Código para el gráfico de porcentaje de usados */}
+          </div>
+          <div className="chart">
+            <h3>Eventos por tipo de evento</h3>
+            {/* Código para el gráfico de eventos por tipo de evento */}
+          </div>
+          <div className="chart">
+            <h3>Asistencias estimadas vs confirmadas</h3>
+            {/* Código para el gráfico de asistencias estimadas vs confirmadas */}
+            <UsuariosVsAsistenciasChart eventos={eventos} />
+          </div>
+          <div className="chart">
+            <h3>Eventos por Lugar</h3>
+            {/* Código para el gráfico de eventos por lugar */}
+          </div>
         </div>
+      </div>
     );
 
     return (
