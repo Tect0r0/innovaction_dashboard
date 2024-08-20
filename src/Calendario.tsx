@@ -58,8 +58,8 @@ const EventPopup: React.FC<{ event: Event; onClose: () => void }> = ({ event, on
             <p>Inicia el {event.start.toLocaleString('es-ES', { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' })}</p>
             <p>Termina el  {event.end.toLocaleString('es-ES', { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' })}</p>
             <p>Detalles Adicionales: {event.desc}</p>
-            <p>Asociacion: {event.asociacion}</p>
-            <p>Ubicacion: {event.ubicacion}</p>
+            <p>Asociación: {event.asociacion}</p>
+            <p>Ubicación: {event.ubicacion}</p>
             <svg
                 version="1.1"
                 id="svg1"

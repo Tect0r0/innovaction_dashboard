@@ -8,10 +8,10 @@ CORS(app)
 
 config = { # Configuracion de MySQL server
         'user': 'root',
-        'password': 'BalooMowgli48.',          #'12345',
+        'password': '12345', #'BalooMowgli48.',          #'12345',
         'host': 'localhost',
         'port': 3306,
-        'database': 'inovaction', #'innovaction',
+        'database': 'innovaction', #'innovaction',
         'raise_on_warnings': True
 }
 
@@ -65,8 +65,8 @@ def agendar_evento():
             return jsonify({'status': 'failure', 'error': 'Conflicting event in the same location and time'}), 409
 
         # Insertar el nuevo evento si no hay conflictos
-        cursor.execute("INSERT INTO eventos (nombre_contacto, info_contacto, asociacion, ubicacion, titulo_evento, tipo_evento, fecha_inicio, fecha_fin, usuarios_estimados, descripcion_evento) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)", 
-                        (nombre_contacto, info_contacto, asociacion, ubicacion, titulo_evento, tipo_evento, fecha_inicio, fecha_fin, usuarios_estimados, descripcion_evento))
+        cursor.execute("INSERT INTO eventos (nombre_contacto, info_contacto, asociacion, ubicacion, titulo_evento, tipo_evento, fecha_inicio, fecha_fin, usuarios_estimados, descripcion_evento, asistencias_confirmadas) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)", 
+                        (nombre_contacto, info_contacto, asociacion, ubicacion, titulo_evento, tipo_evento, fecha_inicio, fecha_fin, usuarios_estimados, descripcion_evento, 0))
         conn.commit()
 
     except mysql.connector.Error as err:
