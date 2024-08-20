@@ -93,17 +93,17 @@ export default function Agendar() {
                 <option id="esferas" value="Esferas">
                   Esferas
                 </option>
-                <option id="makerspace" value="Makerspace">
+                <option id="makerspace" value="Maker Space">
                   Maker Space
                 </option>
                 <option id="sparring" value="Sparring">
                   Sparring
                 </option>
-                <option id="todo" value="Todo Innovaction">
-                  Todo el Innovaction
-                </option>
                 <option id="atenas" value="Atenas">
                   Atenas
+                </option>
+                <option id="todo" value="Todo Innovaction">
+                  Todo el Innovaction
                 </option>
               </select>
             </div>

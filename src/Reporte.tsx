@@ -1,7 +1,8 @@
 // Reporte.js
 import React, { useState, useEffect } from 'react';
 import UsuariosVsAsistenciasChart from './UsuariosVsAsistenciasChart';
-import './Reporte.css'; // Importa tus estilos CSS
+import EventosPorLugarChart from './EventosPorLugarChart';
+import './Reporte.css';
 
 
 
@@ -121,6 +122,7 @@ function Reporte() {
           <div className="chart">
             <h3>Eventos por Lugar</h3>
             {/* Código para el gráfico de eventos por lugar */}
+            <EventosPorLugarChart eventos={eventos} />
           </div>
         </div>
       </div>
@@ -129,8 +131,14 @@ function Reporte() {
     return (
         <div className='container'>
             <div className='headLine'>
-                <h1 onClick={() => setActiveTab('eventos')}>Eventos</h1>
-                <h1 onClick={() => setActiveTab('resultados')}>Resultados</h1>
+                <h1 
+                    style={{color: activeTab === 'eventos' ? "#00A3E0" : "", textDecoration: activeTab === 'eventos' ? "underline" : ""}}
+                    onClick={() => setActiveTab('eventos')}
+                > Eventos </h1>
+                <h1 
+                    style={{color: activeTab === 'resultados' ? "#00A3E0" : "", textDecoration: activeTab === 'resultados' ? "underline" : ""}}
+                    onClick={() => setActiveTab('resultados')}
+                > Resultados </h1>
             </div>
             <br />
             <div className="page">

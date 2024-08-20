@@ -24,17 +24,17 @@ const UsuariosVsAsistenciasChart: React.FC<ChartProps> = ({ eventos }) => {
     ];
 
     const data = {
-      labels: eventos.map((evento) => evento.titulo_evento),
-      datasets: [
-        {
-          label: "Porcentaje de asistencias confirmadas",
-          data: eventos.map(
-            (evento) =>
-              (evento.asistencias_confirmadas / evento.usuarios_estimados) * 100
-          ),
-          backgroundColor: eventos.map((_, index) => colors[(index + 1) % colors.length]),
-        },
-      ],
+        labels: eventos.map((evento) => evento.titulo_evento),
+        datasets: [
+            {
+            label: "Porcentaje de asistencias confirmadas",
+            data: eventos.map(
+                (evento) =>
+                (evento.asistencias_confirmadas / evento.usuarios_estimados) * 100
+            ),
+            backgroundColor: eventos.map((_, index) => colors[(index + 1) % colors.length]),
+            },
+        ],
     };
 
     const options = {
