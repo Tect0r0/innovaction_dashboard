@@ -2,6 +2,8 @@
 import React, { useState, useEffect } from 'react';
 import UsuariosVsAsistenciasChart from './UsuariosVsAsistenciasChart';
 import EventosPorLugarChart from './EventosPorLugarChart';
+import EventosPorTipoChart from './EventosPorTipoChart';
+import AsistenciasPorMesChart from './AsistenciasPorMesChart';
 import './Reporte.css';
 
 
@@ -108,11 +110,13 @@ function Reporte() {
         <div className="chart-container">
           <div className="chart">
             <h3>Porcentaje de usados</h3>
-            {/* Código para el gráfico de porcentaje de usados */}
+                    {/* Código para el gráfico de porcentaje de usados */}
+                    <AsistenciasPorMesChart eventos={eventos} />
           </div>
           <div className="chart">
             <h3>Eventos por tipo de evento</h3>
             {/* Código para el gráfico de eventos por tipo de evento */}
+            <EventosPorTipoChart eventos={eventos} />
           </div>
           <div className="chart">
             <h3>Asistencias estimadas vs confirmadas</h3>
