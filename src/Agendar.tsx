@@ -175,10 +175,6 @@ export default function Agendar() {
               />
             </div>
 
-            
-
-            
-
             <div className="form-field">
               <label htmlFor="usuarios_estimados">Usuarios Estimados:</label>
               <input

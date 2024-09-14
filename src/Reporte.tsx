@@ -48,6 +48,7 @@ function Reporte() {
                 setEventos(prevEventos => prevEventos.map(evento => 
                     evento.id === id ? { ...evento, asistencias_confirmadas: newAsistenciasConfirmadas } : evento
                 ));
+                alert('Asistencias confirmadas actualizadas correctamente');
             }
         })
         .catch(error => console.error('Error updating data:', error));
