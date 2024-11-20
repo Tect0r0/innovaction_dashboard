@@ -34,7 +34,7 @@ def agendar_evento():
         fecha_fin = request.json['fecha_fin']
         usuarios_estimados = request.json['usuarios_estimados']
         descripcion_evento = request.json['descripcion_evento']
-        colaboracion_externa = request.json.get('Colaboracion_Externa', False)
+        colaboracion_externa = request.json['colaboracion_externa']
 
         # Verificar si ya hay un evento en la misma ubicación y hora
         query = """
@@ -66,7 +66,7 @@ def agendar_evento():
             return jsonify({'status': 'failure', 'error': 'Conflicting event in the same location and time'}), 409
 
         # Insertar el nuevo evento si no hay conflictos
-        cursor.execute("INSERT INTO eventos (nombre_contacto, info_contacto, asociacion, ubicacion, titulo_evento, tipo_evento, fecha_inicio, fecha_fin, usuarios_estimados, descripcion_evento, asistencias_confirmadas, colaboracion_externa) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)", 
+        cursor.execute("INSERT INTO eventos (nombre_contacto, info_contacto, asociacion, ubicacion, titulo_evento, tipo_evento, fecha_inicio, fecha_fin, usuarios_estimados, descripcion_evento, asistencias_confirmadas, colaboracion_externa) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)", 
                         (nombre_contacto, info_contacto, asociacion, ubicacion, titulo_evento, tipo_evento, fecha_inicio, fecha_fin, usuarios_estimados, descripcion_evento, 0, colaboracion_externa))
         conn.commit()
 
@@ -90,7 +90,7 @@ def obtener_eventos():
         cursor = conn.cursor()
 
      # Query que trae los datos de la tabla eventos
-        cursor.execute("SELECT id, nombre_contacto, info_contacto, asociacion, ubicacion, titulo_evento, tipo_evento, fecha_inicio, fecha_fin, usuarios_estimados, descripcion_evento, asistencias_confirmadas, impacto, tipo_innovacion, tipo_colaborador, Colaboracion_Externa FROM eventos ORDER BY fecha_inicio DESC")
+        cursor.execute("SELECT id, nombre_contacto, info_contacto, asociacion, ubicacion, titulo_evento, tipo_evento, fecha_inicio, fecha_fin, usuarios_estimados, descripcion_evento, asistencias_confirmadas, impacto, tipo_innovacion, tipo_colaborador, colaboracion_externa FROM eventos ORDER BY fecha_inicio DESC")
 
         eventos = cursor.fetchall()
 
@@ -112,7 +112,7 @@ def obtener_eventos():
                 'impacto': evento[12],
                 'tipo_innovacion': evento[13],
                 'tipo_colaborador': evento[14],
-                'Colaboracion_Externa' : bool(evento[15])
+                'colaboracion_externa' : evento[15]
             } for evento in eventos
         ]
  
@@ -145,12 +145,21 @@ def actualizar_evento():
         ubicacion = request.json.get('ubicacion', current_evento[4])
         titulo_evento = request.json.get('titulo_evento', current_evento[5])
         tipo_evento = request.json.get('tipo_evento', current_evento[6])
-        usuarios_estimados = request.json.get('usuarios_estimados', current_evento[7])
-        descripcion_evento = request.json.get('descripcion_evento', current_evento[8])
-        asistencias_confirmadas = request.json.get('asistencias_confirmadas', current_evento[9])
-        impacto = request.json.get('impacto', current_evento[10])
-        tipo_innovacion = request.json.get('tipo_innovacion', current_evento[11])
-        tipo_colaborador = request.json.get('tipo_colaborador', current_evento[12])
+        fecha_inicio = request.json.get('fecha_inicio', current_evento[7])
+        fecha_fin = request.json.get('fecha_fin', current_evento[8])
+        usuarios_estimados = request.json.get('usuarios_estimados', current_evento[9])
+        descripcion_evento = request.json.get('descripcion_evento', current_evento[10])
+        asistencias_confirmadas = request.json.get('asistencias_confirmadas', current_evento[11])
+        impacto = request.json.get('impacto', current_evento[12])
+        tipo_innovacion = request.json.get('tipo_innovacion', current_evento[13])
+        tipo_colaborador = request.json.get('tipo_colaborador', current_evento[14])
+        colaboracion_externa = request.json.get('colaboracion_externa', current_evento[15])
+
+        # Ensure usuarios_estimados is an integer
+        if isinstance(usuarios_estimados, str) and usuarios_estimados.isdigit():
+            usuarios_estimados = int(usuarios_estimados)
+        elif not isinstance(usuarios_estimados, int):
+            raise ValueError("usuarios_estimados must be an integer")
 
         query = """
         UPDATE eventos SET 
@@ -160,24 +169,30 @@ def actualizar_evento():
             ubicacion = %s,
             titulo_evento = %s,
             tipo_evento = %s,
+            fecha_inicio = %s,
+            fecha_fin = %s,
             usuarios_estimados = %s,
             descripcion_evento = %s,
             asistencias_confirmadas = %s,
             impacto = %s,
             tipo_innovacion = %s,
-            tipo_colaborador = %s
+            tipo_colaborador = %s,
+            colaboracion_externa = %s
         WHERE id = %s
         """
         cursor.execute(query, (
-            nombre_contacto, info_contacto, asociacion, ubicacion, titulo_evento, tipo_evento, 
+            nombre_contacto, info_contacto, asociacion, ubicacion, titulo_evento, tipo_evento, fecha_inicio, fecha_fin,
             usuarios_estimados, descripcion_evento, asistencias_confirmadas, impacto, tipo_innovacion, 
-            tipo_colaborador, evento_id
+            tipo_colaborador, colaboracion_externa,  evento_id
         ))
         conn.commit()
 
     except mysql.connector.Error as err:
         print("Something went wrong: {}".format(err))
         return jsonify({'status': 'failure', 'error': str(err)}), 500
+    except ValueError as ve:
+        print("Value error: {}".format(ve))
+        return jsonify({'status': 'failure', 'error': str(ve)}), 400
 
     finally:
         conn.close()

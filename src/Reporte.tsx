@@ -6,8 +6,6 @@ import EventosPorTipoChart from './EventosPorTipoChart';
 import AsistenciasPorMesChart from './AsistenciasPorMesChart';
 import './Reporte.css';
 
-
-
 function Reporte() {
     interface Evento {
         id: number;
@@ -24,7 +22,8 @@ function Reporte() {
         asistencias_confirmadas: number;
         impacto: string;
         tipo_innovacion: string;
-        tipo_colaborador: string;
+      tipo_colaborador: string;
+      colaboracion_externa: string;
     }
     
     const [eventos, setEventos] = useState<Evento[]>([]);
@@ -100,6 +99,7 @@ function Reporte() {
               <th>Info de Contacto</th>
               <th>Tipo de colaborador</th>
               <th>Asociación</th>
+              <th>Colaboración<br/>Externa</th>
               <th>Ubicación</th>
               <th>Título del Evento</th>
               <th>Descripción Evento</th>
@@ -170,6 +170,15 @@ function Reporte() {
                     defaultValue={evento.asociacion}
                     onChange={(e) =>
                       handleInputChange(evento.id, "asociacion", e.target.value)
+                    }
+                  />
+                </td>
+                <td>
+                  <textarea
+                    className="inputt"
+                    defaultValue={evento.colaboracion_externa}
+                    onChange={(e) =>
+                      handleInputChange(evento.id, "colaboracion_externa", e.target.value)
                     }
                   />
                 </td>
