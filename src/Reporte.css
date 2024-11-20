@@ -69,13 +69,20 @@ table {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-
 .edit {
     background-color: #097ffdfb;
     cursor: pointer;
     border-radius: 25px;
     border: none;
     box-shadow : 0 3px 4px rgba(81, 157, 228, 0.651);
+}
+
+.delete{
+    background-color: #ff0000;
+    cursor: pointer;
+    border-radius: 25px;
+    border: none;
+    box-shadow : 0 3px 4px rgba(255, 0, 0, 0.651);
 }
 
 .inputt {
