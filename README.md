@@ -47,11 +47,11 @@ pip install flask_cors
 pip install mysql
 pip install mysql-connector-python
 
-## Run app:
-# Split terminal
-# Terminal 1:
+# Run app:
+## Split terminal
+## Terminal 1:
 python agendar_evento.py
 
-# Terminal 2:
+## Terminal 2:
 npm i
 npm run dev
