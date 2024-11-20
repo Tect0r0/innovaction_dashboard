@@ -17,7 +17,6 @@ config = { # Configuracion de MySQL server
 
 @app.route('/agendar_evento', methods=['POST'])
 def agendar_evento():
-
     try:
         # Connect to MySQL Server
         conn = mysql.connector.connect(**config)
@@ -26,15 +25,18 @@ def agendar_evento():
         # Obtener datos del request
         nombre_contacto = request.json['nombre_contacto']
         info_contacto = request.json['info_contacto']
+        tipo_colaborador = request.json['tipo_colaborador']
         asociacion = request.json['asociacion']
+        colaboracion_externa = request.json['colaboracion_externa']
         ubicacion = request.json['ubicacion']
         titulo_evento = request.json['titulo_evento']
         tipo_evento = request.json['tipo_evento']
         fecha_inicio = request.json['fecha_inicio']
         fecha_fin = request.json['fecha_fin']
+        impacto = request.json['impacto']
+        tipo_innovacion = request.json['tipo_innovacion']
         usuarios_estimados = request.json['usuarios_estimados']
         descripcion_evento = request.json['descripcion_evento']
-        colaboracion_externa = request.json['colaboracion_externa']
 
         # Verificar si ya hay un evento en la misma ubicación y hora
         query = """
@@ -66,8 +68,17 @@ def agendar_evento():
             return jsonify({'status': 'failure', 'error': 'Conflicting event in the same location and time'}), 409
 
         # Insertar el nuevo evento si no hay conflictos
-        cursor.execute("INSERT INTO eventos (nombre_contacto, info_contacto, asociacion, ubicacion, titulo_evento, tipo_evento, fecha_inicio, fecha_fin, usuarios_estimados, descripcion_evento, asistencias_confirmadas, colaboracion_externa) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)", 
-                        (nombre_contacto, info_contacto, asociacion, ubicacion, titulo_evento, tipo_evento, fecha_inicio, fecha_fin, usuarios_estimados, descripcion_evento, 0, colaboracion_externa))
+        cursor.execute("""
+            INSERT INTO eventos (
+                nombre_contacto, info_contacto, tipo_colaborador, asociacion, colaboracion_externa, 
+                ubicacion, titulo_evento, tipo_evento, fecha_inicio, fecha_fin, impacto, tipo_innovacion, 
+                usuarios_estimados, descripcion_evento, asistencias_confirmadas
+            ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+        """, (
+            nombre_contacto, info_contacto, tipo_colaborador, asociacion, colaboracion_externa, 
+            ubicacion, titulo_evento, tipo_evento, fecha_inicio, fecha_fin, impacto, tipo_innovacion, 
+            usuarios_estimados, descripcion_evento, 0
+        ))
         conn.commit()
 
     except mysql.connector.Error as err:
