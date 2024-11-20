@@ -22,8 +22,8 @@ export default function Agendar() {
       if (response.ok) {
         alert("Evento añadido con éxito");
       } else {
-            const errorData = await response.json();
-            alert(`Error al añadir evento: ${errorData.error}`);
+        const errorData = await response.json();
+        alert(`Error al añadir evento: ${errorData.error}`);
       }
     } catch (error) {
       console.error("Error al enviar el formulario:", error);
@@ -50,7 +50,7 @@ export default function Agendar() {
                 required
                 autoComplete="off"
               />
-            </div> 
+            </div>
 
             <div className="form-field">
               <label htmlFor="info_contacto">Correo o teléfono:</label>
@@ -65,12 +65,38 @@ export default function Agendar() {
             </div>
 
             <div className="form-field">
+              <label htmlFor="tipo_colaborador">Tipo de colaborador:</label>
+              <input
+                id="tipo_colaborador"
+                type="text"
+                name="tipo_colaborador"
+                placeholder="UF/SS/Grupo estudiantil"
+                required
+                autoComplete="off"
+              />
+            </div>
+
+            <div className="form-field">
               <label htmlFor="asociacion">Asociación:</label>
               <input
                 id="asociacion"
                 type="text"
                 name="asociacion"
                 placeholder="Asociacion o empresa"
+                required
+                autoComplete="off"
+              />
+            </div>
+
+            <div className="form-field">
+              <label htmlFor="colaboracion_externa">
+                Colaboración Externa:
+              </label>
+              <input
+                id="colaboracion_externa"
+                type="text"
+                name="colaboracion_externa"
+                placeholder="Si/No"
                 required
                 autoComplete="off"
               />
@@ -176,6 +202,30 @@ export default function Agendar() {
             </div>
 
             <div className="form-field">
+              <label htmlFor="impacto">Impacto:</label>
+              <input
+                id="impacto"
+                type="text"
+                name="impacto"
+                placeholder="Alto/Medio/Bajo"
+                required
+                autoComplete="off"
+              />
+            </div>
+
+            <div className="form-field">
+              <label htmlFor="tipo_innovacion">Tipo de Innovación:</label>
+              <input
+                id="tipo_innovacion"
+                type="text"
+                name="tipo_innovacion"
+                placeholder="Aprender/Innovar/Crear"
+                required
+                autoComplete="off"
+              />
+            </div>
+
+            <div className="form-field">
               <label htmlFor="usuarios_estimados">Usuarios Estimados:</label>
               <input
                 id="usuarios_estimados"
@@ -195,7 +245,7 @@ export default function Agendar() {
                 placeholder="Breve descripción (obligatorio si elegiste 'otro')"
                 rows={4}
                 cols={30}
-                required={espacio === "otro" || evento === "otro"}
+                required={evento === "Otro"}
                 autoComplete="off"
               ></textarea>
               <br />
