@@ -10,7 +10,7 @@ Este Dashboard fue creado con el fin de desplegar los eventos que tomarán lugar
 
 - Gerardo Leiva Diaz (gerardo.leiva.d@gmail.com / a01198479@tec.mx)
 - Isaac Rojas Sosa (isaacrojassosa@gmail.com / a01198693@tec.mx)
-- Saúl Emilio Delgado Garza (saul10emilio@gmail.com/ a01285188@tec.mx)
+- Saúl Emilio Delgado Garza (saul10emilio@gmail.com / a01285188@tec.mx)
 
 ## Tech Stack
 - React
@@ -20,7 +20,7 @@ Este Dashboard fue creado con el fin de desplegar los eventos que tomarán lugar
 - MySQL
 - CSS
 
-## Codigo MYSQL
+## Código MYSQL
 
 CREATE TABLE eventos (
 id INT AUTO_INCREMENT PRIMARY KEY,
