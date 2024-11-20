@@ -46,19 +46,13 @@ table {
 }
 
 .tablee thead {
-
     background-color: #daeaf1;
-
-    
 }
 
 .tablee  td {
   border-width: 2px;
   font-size: 1.05em;
- 
 }
-
-
 
 .chart-container {
     display: flex;
@@ -82,17 +76,31 @@ table {
     border-radius: 25px;
     border: none;
     box-shadow : 0 3px 4px rgba(81, 157, 228, 0.651);
-
 }
 
 .inputt {
-    width: 70%;
+    width: auto;
+    height: 90%; /* Allow height to adjust based on content */
     padding: 2px;
     border-radius: 8px;
     border: 1px solid #ccc;
-    margin-bottom: 10px;
     text-align: center;
-    box-shadow : 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    overflow: hidden; /* Hide scrollbars */
+    overflow-wrap: break-word; /* Ensure text wraps to the next line */
+    word-wrap: break-word; /* Ensure text wraps to the next line */
+    white-space: pre-wrap; /* Preserve whitespace and wrap text */
+    resize: none;
+}
+
+.inputt:focus {
+    outline: none;
+    border-color: #097ffdfb;
+    background-color: rgb(224, 252, 255);
+}
+
+input[type="number"]{
+    width: 90%;
 }
 
 @media only screen and (max-width: 430px)  {
@@ -103,6 +111,5 @@ table {
     .chart {
         flex: 1 1 100%;
     }
-
 }
 
