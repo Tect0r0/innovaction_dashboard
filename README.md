@@ -26,14 +26,18 @@ CREATE TABLE eventos (
 id INT AUTO_INCREMENT PRIMARY KEY,
 nombre_contacto VARCHAR(50),
 info_contacto VARCHAR(100),
+tipo_colaborador VARCHAR(50),
 asociacion VARCHAR(255),
+colaboracion_externa VARCHAR(10),
 ubicacion VARCHAR(255),
 titulo_evento VARCHAR(255) NOT NULL,
+descripcion_evento TEXT,
 tipo_evento VARCHAR(50),
 fecha_inicio DATETIME NOT NULL,
 fecha_fin DATETIME NOT NULL,
+impacto VARCHAR(50),
+tipo_innovacion VARCHAR(50),
 usuarios_estimados int NOT null,
-descripcion_evento TEXT,
 asistencias_confirmadas int NOT NULL
 );
 
