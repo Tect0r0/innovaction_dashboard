@@ -34,6 +34,7 @@ def agendar_evento():
         fecha_fin = request.json['fecha_fin']
         usuarios_estimados = request.json['usuarios_estimados']
         descripcion_evento = request.json['descripcion_evento']
+        colaboracion_externa = request.json.get('Colaboracion_Externa', False)
 
         # Verificar si ya hay un evento en la misma ubicación y hora
         query = """
@@ -65,8 +66,8 @@ def agendar_evento():
             return jsonify({'status': 'failure', 'error': 'Conflicting event in the same location and time'}), 409
 
         # Insertar el nuevo evento si no hay conflictos
-        cursor.execute("INSERT INTO eventos (nombre_contacto, info_contacto, asociacion, ubicacion, titulo_evento, tipo_evento, fecha_inicio, fecha_fin, usuarios_estimados, descripcion_evento, asistencias_confirmadas) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)", 
-                        (nombre_contacto, info_contacto, asociacion, ubicacion, titulo_evento, tipo_evento, fecha_inicio, fecha_fin, usuarios_estimados, descripcion_evento, 0))
+        cursor.execute("INSERT INTO eventos (nombre_contacto, info_contacto, asociacion, ubicacion, titulo_evento, tipo_evento, fecha_inicio, fecha_fin, usuarios_estimados, descripcion_evento, asistencias_confirmadas, colaboracion_externa) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)", 
+                        (nombre_contacto, info_contacto, asociacion, ubicacion, titulo_evento, tipo_evento, fecha_inicio, fecha_fin, usuarios_estimados, descripcion_evento, 0, colaboracion_externa))
         conn.commit()
 
     except mysql.connector.Error as err:
@@ -89,7 +90,7 @@ def obtener_eventos():
         cursor = conn.cursor()
 
      # Query que trae los datos de la tabla eventos
-        cursor.execute("SELECT id, nombre_contacto, info_contacto, asociacion, ubicacion, titulo_evento, tipo_evento, fecha_inicio, fecha_fin, usuarios_estimados, descripcion_evento, asistencias_confirmadas, impacto, tipo_innovacion, tipo_colaborador FROM eventos ORDER BY fecha_inicio DESC")
+        cursor.execute("SELECT id, nombre_contacto, info_contacto, asociacion, ubicacion, titulo_evento, tipo_evento, fecha_inicio, fecha_fin, usuarios_estimados, descripcion_evento, asistencias_confirmadas, impacto, tipo_innovacion, tipo_colaborador, Colaboracion_Externa FROM eventos ORDER BY fecha_inicio DESC")
 
         eventos = cursor.fetchall()
 
@@ -110,7 +111,8 @@ def obtener_eventos():
                 'asistencias_confirmadas': evento[11],
                 'impacto': evento[12],
                 'tipo_innovacion': evento[13],
-                'tipo_colaborador': evento[14]
+                'tipo_colaborador': evento[14],
+                'Colaboracion_Externa' : bool(evento[15])
             } for evento in eventos
         ]
  
