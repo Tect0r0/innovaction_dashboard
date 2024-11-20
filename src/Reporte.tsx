@@ -61,6 +61,26 @@ function Reporte() {
         .catch((error) => console.error("Error updating data:", error));
     };
 
+    const handleDelete = (id: number) => {
+      if (window.confirm("¿Estás seguro de que deseas eliminar este evento?")) {
+        fetch(`http://localhost:5000/eliminar_evento/${id}`, {
+          method: "DELETE",
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            if (data.status === "success") {
+              setEventos((prevEventos) =>
+                prevEventos.filter((evento) => evento.id !== id)
+              );
+              alert("Evento eliminado exitosamente");
+            } else {
+              alert("Error al eliminar el evento: " + data.error);
+            }
+          })
+          .catch((error) => console.error("Error deleting data:", error));
+      }
+    };
+
     const handleInputChange = (id: number, field: keyof Evento, value: any) => {
       setEditableEvento((prevState) => ({
         ...prevState,
@@ -88,9 +108,18 @@ function Reporte() {
               <th>Fecha Fin</th>
               <th>Impacto</th>
               <th>Tipo de Innovación</th>
-              <th>Usuarios<br/>Estimados</th>
-              <th>Asistencias<br/>Confirmadas</th>
-              <th>Actualizar</th>
+              <th>
+                Usuarios
+                <br />
+                Estimados
+              </th>
+              <th>
+                Asistencias
+                <br />
+                Confirmadas
+              </th>
+              <th>Actualizar<br/>Evento</th>
+              <th>Eliminar<br/>Evento</th>
             </tr>
           </thead>
           <tbody>
@@ -276,6 +305,14 @@ function Reporte() {
                     onClick={() => handleEdit(evento.id)}
                   >
                     Actualizar
+                  </button>
+                </td>
+                <td>
+                  <button
+                    className="delete"
+                    onClick={() => handleDelete(evento.id)}
+                  >
+                    Eliminar
                   </button>
                 </td>
               </tr>
