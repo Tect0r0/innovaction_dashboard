@@ -89,7 +89,7 @@ def obtener_eventos():
         cursor = conn.cursor()
 
      # Query que trae los datos de la tabla eventos
-        cursor.execute("SELECT id, nombre_contacto, info_contacto, asociacion, ubicacion, titulo_evento, tipo_evento, fecha_inicio, fecha_fin, usuarios_estimados, descripcion_evento, asistencias_confirmadas FROM eventos ORDER BY fecha_inicio DESC")
+        cursor.execute("SELECT id, nombre_contacto, info_contacto, asociacion, ubicacion, titulo_evento, tipo_evento, fecha_inicio, fecha_fin, usuarios_estimados, descripcion_evento, asistencias_confirmadas, impacto, tipo_innovacion, tipo_colaborador FROM eventos ORDER BY fecha_inicio DESC")
 
         eventos = cursor.fetchall()
 
@@ -107,7 +107,10 @@ def obtener_eventos():
                 'fecha_fin': evento[8].strftime('%Y-%m-%dT%H:%M:%S'),
                 'usuarios_estimados': evento[9],
                 'descripcion_evento': evento[10],
-                'asistencias_confirmadas': evento[11]
+                'asistencias_confirmadas': evento[11],
+                'impacto': evento[12],
+                'tipo_innovacion': evento[13],
+                'tipo_colaborador': evento[14]
             } for evento in eventos
         ]
  
@@ -121,17 +124,53 @@ def obtener_eventos():
     #Caso de exito
     return jsonify({'status': 'success', 'eventos': eventos_list}), 200
 
-@app.route('/actualizar_asistencias', methods=['PUT'])
-def actualizar_asistencias():
+@app.route('/actualizar_evento', methods=['PUT'])
+def actualizar_evento():
     try:
         conn = mysql.connector.connect(**config)
         cursor = conn.cursor()
 
         evento_id = request.json['id']
-        asistencias_confirmadas = request.json['asistencias_confirmadas']
+        
+        # Fetch the current values from the database
+        cursor.execute("SELECT * FROM eventos WHERE id = %s", (evento_id,))
+        current_evento = cursor.fetchone()
+        
+        # Use the current values as defaults
+        nombre_contacto = request.json.get('nombre_contacto', current_evento[1])
+        info_contacto = request.json.get('info_contacto', current_evento[2])
+        asociacion = request.json.get('asociacion', current_evento[3])
+        ubicacion = request.json.get('ubicacion', current_evento[4])
+        titulo_evento = request.json.get('titulo_evento', current_evento[5])
+        tipo_evento = request.json.get('tipo_evento', current_evento[6])
+        usuarios_estimados = request.json.get('usuarios_estimados', current_evento[7])
+        descripcion_evento = request.json.get('descripcion_evento', current_evento[8])
+        asistencias_confirmadas = request.json.get('asistencias_confirmadas', current_evento[9])
+        impacto = request.json.get('impacto', current_evento[10])
+        tipo_innovacion = request.json.get('tipo_innovacion', current_evento[11])
+        tipo_colaborador = request.json.get('tipo_colaborador', current_evento[12])
 
-        cursor.execute("UPDATE eventos SET asistencias_confirmadas = %s WHERE id = %s", 
-                       (asistencias_confirmadas, evento_id))
+        query = """
+        UPDATE eventos SET 
+            nombre_contacto = %s,
+            info_contacto = %s,
+            asociacion = %s,
+            ubicacion = %s,
+            titulo_evento = %s,
+            tipo_evento = %s,
+            usuarios_estimados = %s,
+            descripcion_evento = %s,
+            asistencias_confirmadas = %s,
+            impacto = %s,
+            tipo_innovacion = %s,
+            tipo_colaborador = %s
+        WHERE id = %s
+        """
+        cursor.execute(query, (
+            nombre_contacto, info_contacto, asociacion, ubicacion, titulo_evento, tipo_evento, 
+            usuarios_estimados, descripcion_evento, asistencias_confirmadas, impacto, tipo_innovacion, 
+            tipo_colaborador, evento_id
+        ))
         conn.commit()
 
     except mysql.connector.Error as err:
