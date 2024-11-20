@@ -182,5 +182,28 @@ def actualizar_evento():
 
     return jsonify({'status': 'success'}), 200
 
+@app.route('/eliminar_evento/<int:evento_id>', methods=['DELETE'])
+def eliminar_evento(evento_id):
+    try:
+
+        conn = mysql.connector.connect(**config)
+        cursor = conn.cursor()
+
+        cursor.execute("DELETE FROM eventos WHERE id = %s", (evento_id,))
+        conn.commit()
+
+        if cursor.rowcount == 0:
+            return jsonify({'status': 'failure', 'error': 'Evento no encontrado'}), 404
+
+    except mysql.connector.Error as err:
+        print("Something went wrong: {}".format(err))
+        return jsonify({'status': 'failure', 'error': str(err)}), 500
+
+    finally:
+        conn.close()
+
+    return jsonify({'status': 'success', 'message': 'Evento eliminado exitosamente'}), 200
+
+
 if __name__ == '__main__':
     app.run(debug=True)
