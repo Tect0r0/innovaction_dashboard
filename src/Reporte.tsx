@@ -1,5 +1,5 @@
 // Reporte.js
-import React, { useState, useEffect } from 'react';
+import  { useState, useEffect } from 'react';
 import UsuariosVsAsistenciasChart from './UsuariosVsAsistenciasChart';
 import EventosPorLugarChart from './EventosPorLugarChart';
 import EventosPorTipoChart from './EventosPorTipoChart';
@@ -25,10 +25,92 @@ function Reporte() {
       tipo_colaborador: string;
       colaboracion_externa: string;
     }
-    
+    // Pagination
+    const [currentPage, setCurrentPage] = useState(1);
+    const eventsPerPage = 10;  
+    const indexOfLastEvent = currentPage * eventsPerPage;
+    const indexOfFirstEvent = indexOfLastEvent - eventsPerPage;
+    // Eventos
     const [eventos, setEventos] = useState<Evento[]>([]);
+
+    // Tabs
     const [activeTab, setActiveTab] = useState('eventos');
+    // Tabla de eventos
     const [editableEvento, setEditableEvento] = useState<{ [key: number]: Partial<Evento>; }>({});
+
+    // Filtros
+    const [showDatePopup, setShowDatePopup] = useState(false);
+
+    const [filters, setFilters] = useState({
+      tipo_colaborador: 'todos',
+      nombre_contacto: '',
+      asociacion: '',
+      colaboracion_externa: 'todos',
+      ubicacion: [] as string[],
+      titulo_evento: '',
+      tipo_evento: [] as string[],
+      fecha_inicio: '',
+      fecha_fin: '',
+      impacto: 'todos',
+  });
+  
+  const [sortBy, setSortBy] = useState('mas_recientes');
+
+  const handleFilterChange = (field: keyof typeof filters, value: string | string[]) => {
+    setFilters((prevFilters) => ({ ...prevFilters, [field]: value }));
+  };
+
+  const handleMultiSelectChange = (field: keyof typeof filters, value: string) => {
+      setFilters((prevFilters) => ({
+          ...prevFilters,
+          [field]: Array.isArray(prevFilters[field]) && prevFilters[field].includes(value)
+              ? prevFilters[field].filter((item: string) => item !== value)
+              : [...(prevFilters[field] as string[]), value],
+      }));
+  };
+
+const filteredEvents = eventos
+    .filter((evento) => {
+        // Tipo Colaborador
+        if (filters.tipo_colaborador !== 'todos' && evento.tipo_colaborador !== filters.tipo_colaborador) return false;
+        // Nombre Contacto
+        if (filters.nombre_contacto && !evento.nombre_contacto.toLowerCase().includes(filters.nombre_contacto.toLowerCase())) return false;
+        // Asociación
+        if (filters.asociacion && !evento.asociacion.toLowerCase().includes(filters.asociacion.toLowerCase())) return false;
+        // Colaboración Externa
+        if (filters.colaboracion_externa !== 'todos' && evento.colaboracion_externa !== filters.colaboracion_externa) return false;
+        // Ubicación
+        if (filters.ubicacion.length > 0 && !filters.ubicacion.includes(evento.ubicacion)) return false;
+        // Título Evento
+        if (filters.titulo_evento && !evento.titulo_evento.toLowerCase().includes(filters.titulo_evento.toLowerCase())) return false;
+        // Tipo Evento
+        if (filters.tipo_evento.length > 0 && !filters.tipo_evento.includes(evento.tipo_evento)) return false;
+        // Impacto
+        if (filters.impacto !== 'todos' && evento.impacto !== filters.impacto) return false;
+        // Fecha Rango
+        if (
+          (filters.fecha_inicio && new Date(evento.fecha_inicio) < new Date(filters.fecha_inicio)) ||
+          (filters.fecha_fin && new Date(evento.fecha_fin) > new Date(filters.fecha_fin))
+      )
+          return false;
+
+        return true;
+    })
+    .sort((a, b) => {
+      const dateA = new Date(a.fecha_inicio).getTime();
+      const dateB = new Date(b.fecha_inicio).getTime();
+      const now =  Date.now();
+      if (sortBy === 'eventos_mas_cercanos') return Math.abs(dateA - now) - Math.abs(dateB - now);
+      if (sortBy === 'mas_recientes') return dateB - dateA;
+      if (sortBy === 'hace_mas_tiempo') return dateA - dateB;
+      if (sortBy === 'mayor_usuarios_estimados') return b.usuarios_estimados - a.usuarios_estimados;
+      if (sortBy === 'menor_usuarios_estimados') return a.usuarios_estimados - b.usuarios_estimados;
+      if (sortBy === 'mayor_usuarios_confirmados') return b.asistencias_confirmadas - a.asistencias_confirmadas;
+      if (sortBy === 'menor_usuarios_confirmados') return a.asistencias_confirmadas - b.asistencias_confirmadas;
+      return 0;
+  });
+
+  const currentEvents = filteredEvents.slice(indexOfFirstEvent, indexOfLastEvent);
 
     useEffect(() => {
         fetch('http://localhost:5000/eventos')
@@ -90,6 +172,23 @@ function Reporte() {
       }));
     };
 
+    const renderPagination = () => {
+      const totalPages = Math.ceil(eventos.length / eventsPerPage);
+      return (
+          <div className="pagination">
+              {Array.from({ length: totalPages }, (_, i) => (
+                  <button
+                      key={i}
+                      className={`page-button ${i + 1 === currentPage ? 'active' : ''}`}
+                      onClick={() => setCurrentPage(i + 1)}
+                  >
+                      {i + 1}
+                  </button>
+              ))}
+          </div>
+      );
+  };
+
     const renderEventos = () => (
       <div className="table-container">
         <table className="tablee">
@@ -123,7 +222,7 @@ function Reporte() {
             </tr>
           </thead>
           <tbody>
-            {eventos.map((evento) => (
+            {currentEvents.map((evento) => (
               <tr key={evento.id}>
                 <td>
                   <textarea
@@ -328,33 +427,207 @@ function Reporte() {
             ))}
           </tbody>
         </table>
+        {renderPagination()}
+
       </div>
     );
 
+    
+    const renderFilters = () => (
+      <div className="filters">
+        <div className='filtCont'>
+          <h3 className='filtLabel'> Titulo del evento</h3>
+          <input className='filterInput'
+              type="text"
+              value={filters.titulo_evento}
+              onChange={(e) => handleFilterChange('titulo_evento', e.target.value)}
+              placeholder='Nombre del evento'
+          />
+        </div>
+
+        <div className='filtCont'>
+        <h3 className='filtLabel'> Tipo Colaborador</h3>
+          <select className="filterSelect"
+              value={filters.tipo_colaborador}
+              onChange={(e) => handleFilterChange('tipo_colaborador', e.target.value)}
+          >
+              <option value="todos">Todos</option>
+              <option value="UF">UF</option>
+              <option value="SS">SS</option>
+              <option value="Grupo estudiantil">Grupo estudiantil</option>
+          </select>
+        </div>
+
+        <div className='filtCont'>
+          <h3 className='filtLabel'> Colaboracion Externa</h3>
+          <select className="filterSelect"
+                value={filters.colaboracion_externa}
+                onChange={(e) => handleFilterChange('colaboracion_externa', e.target.value)}
+            >
+                <option value="todos">Todos</option>
+                <option value="Si">Si</option>
+                <option value="No">No</option>
+            </select>
+        </div>
+
+
+        <div className='filtCont'>
+          <h3 className='filtLabel'> Ubicacion</h3>
+            <div>
+              <select className="filterSelect"
+                  value={filters.ubicacion[0] || 'todos'}
+                  onChange={(e) =>
+                      handleFilterChange(
+                          'ubicacion',
+                          e.target.value === 'todos' ? [] : [e.target.value]
+                      )
+                  }
+              >
+                  <option value="todos">Todos</option>
+                  <option value="Fractal">Fractal</option>
+                  <option value="Esferas">Esferas</option>
+                  <option value="Maker Space">Maker Space</option>
+                  <option value="Sparring">Sparring</option>
+                  <option value="Atenas">Atenas</option>
+                  <option value="Todo Innovaction">Todo Innovaction</option>
+              </select>
+          </div>
+        </div>
+        
+        <div className='filtCont'>
+          <h3 className='filtLabel'> Impacto</h3>
+          <select className="filterSelect"
+              value={filters.impacto}
+              onChange={(e) => handleFilterChange('impacto', e.target.value)}
+          >
+              <option value="todos">Todos</option>
+              <option value="Alto">Alto</option>
+              <option value="Medio">Medio</option>
+              <option value="Bajo">Bajo</option>
+          </select>
+        </div>
+
+        <div className='filtCont'>
+          <h3 className='filtLabel'> Ordenar Por:</h3>
+          <select  className="filterSelect" value={sortBy} onChange={(e) => setSortBy(e.target.value)}>
+              <option value="mas_recientes">Más Recientes</option>
+              <option value="hace_mas_tiempo">Hace Más Tiempo</option>
+              <option value="mayor_usuarios_estimados">Mayor Usuarios Estimados</option>
+              <option value="menor_usuarios_estimados">Menor Usuarios Estimados</option>
+              <option value="mayor_usuarios_confirmados">Mayor Usuarios Confirmados</option>
+              <option value="menor_usuarios_confirmados">Menor Usuarios Confirmados</option>
+          </select>
+        </div>
+
+        <div className='filtCont'>
+          <h3 className='filtLabel'> Nombre </h3>
+          <input className='filterInput'
+              type="text"
+              value={filters.nombre_contacto}
+              onChange={(e) => handleFilterChange('nombre_contacto', e.target.value)}
+              placeholder='Quien registro el evento'
+          />
+        </div>
+
+        <div className='filtCont'>
+          <h3 className='filtLabel'> Asociacion </h3>
+          <input className='filterInput'
+              type="text"
+              value={filters.asociacion}
+              onChange={(e) => handleFilterChange('asociacion', e.target.value)}
+              placeholder='Asociacion del evento'
+          />
+        </div>
+
+        <div className='filtCont'>
+          <h3 className='filtLabel'> Tipo de Evento</h3>
+          <select className="filterSelect"
+              value={filters.tipo_evento[0] || 'todos'}
+              onChange={(e) =>
+                  handleMultiSelectChange(
+                                        'tipo_evento',
+                                        e.target.value === 'todos' ? '' : e.target.value
+                                    )
+              }
+          >
+              <option value="todos">Todos</option>
+              <option value="Taller">Taller</option>
+              <option value="Conferencia">Conferencia</option>
+              <option value="Seminario">Seminario</option>
+              <option value="Curso">Curso</option>
+              <option value="Otro">Otro</option>
+          </select>
+        </div>
+
+        <div className='filtCont'>
+          <h3 className='filtLabel'> Limpiar Filtros</h3>
+          <button
+              className='filterButton'
+              onClick={() => {
+                  setFilters({
+                      tipo_colaborador: 'todos',
+                      nombre_contacto: '',
+                      asociacion: '',
+                      colaboracion_externa: 'todos',
+                      ubicacion: [],
+                      titulo_evento: '',
+                      tipo_evento: [],
+                      fecha_inicio: '',
+                      fecha_fin: '',
+                      impacto: 'todos',
+                  });
+                  setSortBy('mas_recientes');
+              }}
+          > 
+              Limpiar Filtros
+          </button>
+        </div>
+
+        <div className='filtCont'>
+          <h3 className='filtLabel'> Rango de Fechas</h3>
+        
+                    <button className='filterButton' onClick={() => setShowDatePopup(true)}>Filtrar por Fecha</button>
+          {showDatePopup && (
+              <div className="date-popup">
+                  <input
+                      type="datetime-local"
+                      onChange={(e) => handleFilterChange('fecha_inicio', e.target.value)}
+                      value={filters.fecha_inicio}
+                  />
+                  <input
+                      type="datetime-local"
+                      onChange={(e) => handleFilterChange('fecha_fin', e.target.value)}
+                      value={filters.fecha_fin}
+                  />
+                  <button onClick={() => setShowDatePopup(false)}>Aplicar</button>
+              </div>
+          )}
+  
+        </div>
+
+
+      </div>
+  );
+  
+  
     const renderResultados = () => (
       <div>
-        {/* Aquí puedes agregar el código para renderizar las gráficas y otros datos */}
         <h2>Resultados</h2>
-        {/* Ejemplo de gráficos */}
         <div className="chart-container">
           <div className="chart">
             <h3>Porcentaje de usados</h3>
-                    {/* Código para el gráfico de porcentaje de usados */}
                     <AsistenciasPorMesChart eventos={eventos} />
           </div>
           <div className="chart">
             <h3>Eventos por tipo de evento</h3>
-            {/* Código para el gráfico de eventos por tipo de evento */}
             <EventosPorTipoChart eventos={eventos} />
           </div>
           <div className="chart">
             <h3>Asistencias estimadas vs confirmadas</h3>
-            {/* Código para el gráfico de asistencias estimadas vs confirmadas */}
             <UsuariosVsAsistenciasChart eventos={eventos} />
           </div>
           <div className="chart">
             <h3>Eventos por Lugar</h3>
-            {/* Código para el gráfico de eventos por lugar */}
             <EventosPorLugarChart eventos={eventos} />
           </div>
         </div>
@@ -374,10 +647,11 @@ function Reporte() {
                 > Resultados </h1>
             </div>
             <br />
-            <div className="page">
-                {activeTab === 'eventos' ? renderEventos() : renderResultados()}
-            </div>
-        </div>
+    {activeTab === 'eventos' && renderFilters()}
+    <div className="page">
+        {activeTab === 'eventos' ? renderEventos() : renderResultados()}
+    </div>
+</div>
     );
 }
 

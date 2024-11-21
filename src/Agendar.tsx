@@ -46,7 +46,7 @@ export default function Agendar() {
                 id="nombre_contacto"
                 type="text"
                 name="nombre_contacto"
-                placeholder="Nombre"
+                placeholder="Nombre de la persona que registra el evento"
                 required
                 autoComplete="off"
               />

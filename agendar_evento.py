@@ -7,11 +7,11 @@ app = Flask(__name__)
 CORS(app)
 
 config = { # Configuracion de MySQL server
-        'user': 'root',
-        'password': '12345', #'BalooMowgli48.',          #'12345',
+        'user': 'root', 
+        'password': 'BalooMowgli48.', #'BalooMowgli48.',          #'12345',
         'host': 'localhost',
         'port': 3306,
-        'database': 'innovaction', #'innovaction',
+        'database': 'inovaction', #'innovaction',
         'raise_on_warnings': True
 }
 

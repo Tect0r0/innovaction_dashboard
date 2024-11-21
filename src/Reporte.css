@@ -2,14 +2,43 @@
 
 .container {
     width: 100%;
-    max-width: 1200px;
+    max-width: 1400px;
     margin: 0 auto;
     padding: 20px;
 }
 
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.page-button {
+    padding: 8px 12px;
+    margin: 0 5px;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.page-button.active {
+    background-color: #00a3e0;
+    color: white;
+    border: none;
+}
+
+
+
+.page-button:hover {
+    background-color: #007bb5;
+    color: white;
+}
+
 .headLine {
     text-align: center;
-    height: 10vw;
+    height: 70px;
+    max-height: 80px;
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -32,7 +61,9 @@
 
 .table-container {
     width: 100%;
-    overflow-x: auto; /* Añade desplazamiento horizontal */
+    overflow-x: auto; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
 }
 
 table {
@@ -87,16 +118,16 @@ table {
 
 .inputt {
     width: auto;
-    height: 90%; /* Allow height to adjust based on content */
+    height: 90%; 
     padding: 2px;
     border-radius: 8px;
     border: 1px solid #ccc;
     text-align: center;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    overflow: hidden; /* Hide scrollbars */
-    overflow-wrap: break-word; /* Ensure text wraps to the next line */
-    word-wrap: break-word; /* Ensure text wraps to the next line */
-    white-space: pre-wrap; /* Preserve whitespace and wrap text */
+    overflow: hidden; 
+    overflow-wrap: break-word;
+    word-wrap: break-word; 
+    white-space: pre-wrap; 
     resize: none;
 }
 
@@ -109,6 +140,79 @@ table {
 input[type="number"]{
     width: 90%;
 }
+.filters {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Crea columnas flexibles */
+    gap: 6px; 
+    padding: 10px;
+    background: #cce7fff8;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    margin-top: 0px;
+}
+.filterSelect {
+    padding: 5px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    background-color: white;
+    cursor: pointer;
+    max-height: 40px;
+    margin-top: 0px;
+}
+
+.filterInput {
+    padding: 5px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    background-color: white;
+    cursor: pointer;
+    max-height: 40px;
+    margin-top: 0px;
+}
+.filterButton {
+    padding: 5px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    background-color: white;
+    cursor: pointer;
+    max-height: 40px;
+    color: black;
+    transition: 0.4s;
+}
+
+.filterButton:hover {
+    background-color: #097ffdfb;
+    color: white;
+}
+.filtLabel {
+    font-size: 1.2em;
+    margin-bottom: 0px;
+  
+}
+
+.filtCont {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+}
+
+.date-popup {
+    position: absolute;
+    background-color: white;
+    border: 1px solid #ccc;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    z-index: 1000;
+}
+.date-popup input {
+    margin-bottom: 10px;
+    padding: 8px;
+    width: calc(100% - 16px);
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
 
 @media only screen and (max-width: 430px)  {
     .headLine {
